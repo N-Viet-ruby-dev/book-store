@@ -16,12 +16,13 @@ gem "sass-rails", "~> 5.0"
 gem "slim-rails"
 gem "uglifier", ">= 1.3.0"
 gem "devise", "~> 4.7.1"
-gem "bootstrap", "~> 4.3", ">= 4.3.1"
+gem "bootstrap", "~> 4.3.1"
 gem "jquery-rails"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "pry-rails"
+  gem "faker", "~> 2.3"
 end
 
 group :development do
