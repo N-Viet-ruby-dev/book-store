@@ -1,0 +1,7 @@
+- if rooms_list.present?
+  nav.nav.flex-column
+    - rooms_list.each do |room|
+      = link_to room.name, room_path(room), class: 'nav-link room-nav-link'
+- else
+  .text-muted
+    | The are no rooms

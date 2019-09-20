@@ -1,0 +1,11 @@
+.chat-message-container
+  .row.no-gutters
+    .col-auto.text-center
+      = room_message.user.email
+    .col
+      .message-content
+        p.mb-1
+          = room_message.message
+        .text-right
+          small
+            = room_message.created_at

@@ -1,0 +1,9 @@
+h1
+  = @room.name
+.row
+  .col-12.col-md-3
+    = render partial: "rooms_list", locals: { rooms_list: @rooms }
+  .col
+    .chat#messages data-room-id="#{ @room.id }"
+      = render @room.room_messages
+    = render "room_messages/message_form"

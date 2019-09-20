@@ -1,0 +1,8 @@
+.login-page
+  .form
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "email"
+      = f.submit "Send Reset Password Link", class: "btn"
+      p.message
+        = render "devise/shared/links"
