@@ -1,6 +1,7 @@
 - if @room.errors.any?
-  | alert('Room invalid');
+  | alert("#{@room}");
 - else
-  | alert('Success');
+  | $('#room').html("#{ j render @room }");
+  | CreateRoomChanel();
 
 

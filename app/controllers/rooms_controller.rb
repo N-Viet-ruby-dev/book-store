@@ -1,27 +1,28 @@
-class RoomsController < ApplicationController
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  before_action :load_entities, except: [:edit, :update, :destroy]
+class RoomsController < ApplicationController
+  before_action :load_room, only: :show
 
   def index
+    @rooms = Room.all.unassigned if current_user&.admin?
   end
 
   def show
-    @room_message = RoomMessage.new
-  end
-
-  def create
-    @room = Room.new(name: "Room_#{ Room.last.id + 1 }")
-    @room.save
     respond_to do |format|
       format.js
     end
   end
 
-  protected
+  def create
+    @room = Room.find_or_create_by(name: "Room #{current_or_guest_user.email}")
+    respond_to do |format|
+      format.js
+    end
+  end
 
-  def load_entities
-    @rooms = Room.all
-    @room = Room.includes(:room_messages, :users).find(params[:id])
+  private
+
+  def load_room
+    @room = Room.find(params[:id])
   end
 end

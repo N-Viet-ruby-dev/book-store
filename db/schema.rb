@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_19_044252) do
+ActiveRecord::Schema.define(version: 2019_09_23_094913) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_044252) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["name"], name: "index_rooms_on_name", unique: true
   end
 
@@ -93,6 +94,8 @@ ActiveRecord::Schema.define(version: 2019_09_19_044252) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 0
+    t.boolean "online", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -105,5 +108,4 @@ ActiveRecord::Schema.define(version: 2019_09_19_044252) do
   add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "room_messages", "rooms"
-  add_foreign_key "room_messages", "users"
 end

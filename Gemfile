@@ -18,8 +18,7 @@ gem "uglifier", ">= 1.3.0"
 gem "devise", "~> 4.7.1"
 gem "bootstrap", "~> 4.3.1"
 gem "jquery-rails"
-gem 'redis'
-gem "turbolinks", "~> 5"
+gem "redis"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

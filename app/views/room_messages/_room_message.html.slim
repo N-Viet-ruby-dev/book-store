@@ -1,7 +1,10 @@
 .chat-message-container
   .row.no-gutters
     .col-auto.text-center
-      = room_message.user.email
+      - if room_message.user
+        = room_message.user.email
+      - else
+        = "guest"
     .col
       .message-content
         p.mb-1

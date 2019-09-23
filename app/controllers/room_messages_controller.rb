@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoomMessagesController < ApplicationController
   def create
     @message = current_user.room_messages.build(room_message_params)

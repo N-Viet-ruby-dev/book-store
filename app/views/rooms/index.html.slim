@@ -1,15 +1,9 @@
 .row
   .col-12.col-md-3
     .mb-3
-      .mb-3
-        = link_to "Create a room", rooms_path, method: :post, remote: true, class: 'btn btn-primary'
-        = render partial: "rooms_list", locals: { rooms_list: @rooms}
-  .col
-    .alert.alert-primary
-      h4.alert-heading
-        | Welcome to the RailsChatTutorial!
-      p
-        | We need to talk.
-      hr
-      p
-        | You can create or join a room from the sidebar.
+      = link_to "Create a room", rooms_path, method: :post, remote: true, class: 'btn btn-primary'
+
+    - if @rooms.present?
+      nav.nav.flex-column
+        = render partial: "rooms_list", collection: @rooms, as: :room
+  .col#room
