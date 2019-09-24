@@ -1,0 +1,7 @@
+- if @room.errors.any?
+  | alert("#{@room}");
+- else
+  | $('#room').html("#{ j render @room }");
+  | CreateRoomChanel();
+
+

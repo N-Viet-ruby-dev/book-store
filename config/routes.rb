@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: "static_pages#home"
+  root to: "rooms#index"
   devise_for :users
-  get "static_pages/home"
-  get "static_pages/about"
-  get "static_pages/contact"
 
   namespace :manager do
     root "charts#index"
   end
+
+  resources :room_messages
+  resources :rooms
+
+  mount ActionCable.server => '/cable'
 end

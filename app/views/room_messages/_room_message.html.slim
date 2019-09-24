@@ -1,0 +1,14 @@
+.chat-message-container
+  .row.no-gutters
+    .col-auto.text-center
+      - if room_message.user
+        = room_message.user.email
+      - else
+        = "guest"
+    .col
+      .message-content
+        p.mb-1
+          = room_message.message
+        .text-right
+          small
+            = room_message.created_at

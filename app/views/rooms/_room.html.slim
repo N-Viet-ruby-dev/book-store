@@ -1,0 +1,3 @@
+.chat#messages data-room-id="#{ room.id }"
+  = render room.room_messages
+= render "room_messages/message_form", room: room
