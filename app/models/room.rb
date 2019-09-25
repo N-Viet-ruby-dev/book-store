@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class Room < ApplicationRecord
-  has_many :room_messages, dependent: :destroy
+  enum status: { opening: 0, closed: 1 }
+
   belongs_to :assignee, class_name: "User", optional: true
   belongs_to :guest, class_name: "User", optional: true
+  has_many :room_messages, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 

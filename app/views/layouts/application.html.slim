@@ -7,7 +7,7 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
-  body.container data-appearance-flag="#{ user_signed_in? ? 1 : 0}"
+  body.container
     = render "shared/navbar"
     = render "shared/flash"
     = yield
