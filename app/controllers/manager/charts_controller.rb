@@ -2,7 +2,6 @@
 
 module Manager
   class ChartsController < BaseController
-    def index
-    end
+    def index; end
   end
 end

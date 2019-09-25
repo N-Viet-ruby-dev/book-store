@@ -19,6 +19,7 @@ gem "devise", "~> 4.7.1"
 gem "bootstrap", "~> 4.3.1"
 gem "jquery-rails"
 gem "redis"
+gem "config"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

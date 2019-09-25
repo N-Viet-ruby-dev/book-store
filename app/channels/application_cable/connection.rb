@@ -6,17 +6,15 @@ module ApplicationCable
 
     def connect
       self.current_user = find_verified_user
-      logger.add_tags "ActionCable", current_user.id
-      logger.add_tags "ActionCable", current_user.fullname
     end
 
     protected
 
     def find_verified_user
-      if cookies.signed[:guest_user_email]
-        verified_user = User.find_by!(email: cookies.signed[:guest_user_email])
-      elsif env["warden"].user
-        verified_user = env["warden"].user
+      if env["warden"].user
+        env["warden"].user
+      elsif cookies.signed[:guest_user_email]
+        User.find_by!(email: cookies.signed[:guest_user_email])
       else
         reject_unauthorized_connection
       end
