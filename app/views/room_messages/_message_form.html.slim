@@ -1,5 +1,6 @@
-= form_for room.room_messages.build, url: "#" do |f|
-  .input-group.mb-3
-    = f.text_field :message, required: true, class: "chat-input"
-    .input-group-append
-      = f.submit "Send", class: "btn btn-primary chat-input"
+.type_msg
+  .input_msg_write
+    = form_for room.room_messages.build, url: "#" do |f|
+      = f.text_field :message, required: true, class: "write_msg", placeholder: "Type a message"
+      button.msg_send_btn type="button"
+        i.fas.fa-paper-plane aria-hidden="true"

@@ -2,6 +2,24 @@ var ScrollBot = function (selector){
   selector.scrollTop(selector[0].scrollHeight);
 };
 
+var AppendMessageHtml = function (data, messages){
+  if ( data['user_id'] == messages.data('user-id') ) {
+    html = "<div class='outgoing_msg'><div class='sent_msg'><p>" +
+      data['message'] + "</p><span class='time_date'>" +
+      data["hour_minute"] + " | " + data['month_day'] +
+      "</span></div></div>";
+    messages.append(html);
+  } else {
+    html = "<div class='incoming_msg'><div class='incoming_msg_img'>" +
+      "<img src='https://ptetutorials.com/images/user-profile.png'></div>" +
+      "<div class='received_msg'><div class='received_withd_msg'><p>" +
+      data['message'] + "</p><span class='time_date'>" +
+      data['hour_minute'] + " | " + data['month_day'] +
+      "</span></div></div></div>";
+    messages.append(html);
+  }
+};
+
 var CreateRoomChanel = function () {
   var messages = $('#messages');
   ScrollBot(messages);
@@ -14,8 +32,8 @@ var CreateRoomChanel = function () {
       connected() {},
       disconnected() {},
       received(data) {
-          messages.append(data['message']);
-          ScrollBot(messages);
+        AppendMessageHtml(data, messages);
+        ScrollBot(messages);
       },
       send_message(message, room_id) {
         return this.perform('send_message', {message, room_id});

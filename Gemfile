@@ -22,6 +22,7 @@ gem "redis"
 gem "chartjs-ror", "~> 3.6.4"
 gem "groupdate", "~> 4.1.2"
 gem "config"
+gem 'font-awesome-sass', '~> 5.11.2'
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

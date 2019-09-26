@@ -1,14 +1,18 @@
-.chat-message-container
-  .row.no-gutters
-    .col-auto.text-center
-      - if room_message.user
-        = room_message.user.email
-      - else
-        = "guest"
-    .col
-      .message-content
-        p.mb-1
+- if room_message.id
+  - if room_message.user_id == user.id
+    .outgoing_msg
+      .sent_msg
+        p
           = room_message.message
-        .text-right
-          small
-            = room_message.created_at
+        span.time_date
+          = "#{room_message.created_at.strftime('%H:%M')} | #{room_message.created_at.strftime('%b %d')}"
+  - else
+    .incoming_msg
+      .incoming_msg_img
+        img src="https://ptetutorials.com/images/user-profile.png"
+      .received_msg
+        .received_withd_msg
+          p
+            = room_message.message
+          span.time_date
+            = "#{room_message.created_at.strftime('%H:%M')} | #{room_message.created_at.strftime('%b %d')}"

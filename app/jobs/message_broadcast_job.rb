@@ -4,12 +4,10 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(room_message)
-    ActionCable.server.broadcast "rooms_#{room_message.room.id}_channel", message: render_message(room_message)
-  end
-
-  private
-
-  def render_message(room_message)
-    RoomMessagesController.render partial: "room_messages/room_message", locals: { room_message: room_message }
+    ActionCable.server.broadcast "rooms_#{room_message.room.id}_channel",
+      message: room_message.message,
+      hour_minute: room_message.created_at.strftime("%H:%M"),
+      month_day: room_message.created_at.strftime("%b %d"),
+      user_id: room_message.user_id
   end
 end

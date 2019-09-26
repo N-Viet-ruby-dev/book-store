@@ -11,10 +11,10 @@ module ApplicationCable
     protected
 
     def find_verified_user
-      if cookies.signed[:guest_user_email]
-        User.find_by!(email: cookies.signed[:guest_user_email])
-      elsif env["warden"].user
+      if env["warden"].user
         env["warden"].user
+      elsif cookies.signed[:guest_user_email]
+        User.find_by!(email: cookies.signed[:guest_user_email])
       else
         reject_unauthorized_connection
       end
