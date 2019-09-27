@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       collection do
         get "order_by_month"
         get "order_by_year"
+        get "order_details_by_date"
+        get "compare_between_year"
+        get "chart_compare_the_year"
+        get "statistics_by_the_year"
       end
     end
   end
