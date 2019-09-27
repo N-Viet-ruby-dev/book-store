@@ -79,7 +79,6 @@ ActiveRecord::Schema.define(version: 2019_09_26_134911) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 0
     t.integer "assignee_id"
     t.index ["name"], name: "index_rooms_on_name", unique: true
   end

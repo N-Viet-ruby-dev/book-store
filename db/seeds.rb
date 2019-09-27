@@ -18,7 +18,8 @@ end
 
 20.times do |n|
   Order.create!(total_price: Faker::Number.number(digits: 7),
-    user_id: User.all.sample.id)
+    user_id: User.all.sample.id,
+    created_at: Faker::Date.between(from: 7.days.ago, to: Date.today))
 end
 
 100.times do |n|

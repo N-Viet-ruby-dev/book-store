@@ -1,0 +1,7 @@
+.row
+  .to_day_order
+    .form-group.week-order
+      = select_tag :year, options_for_select(@date), class: "form-control order-year"
+    canvas#myChart.chart_by_year
+  .to_month_order
+    canvas#myChartByMonth
