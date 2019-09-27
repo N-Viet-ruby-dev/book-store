@@ -1,18 +1,5 @@
 - if room_message.id
-  - if room_message.user_id == user.id
-    .outgoing_msg
-      .sent_msg
-        p
-          = room_message.message
-        span.time_date
-          = "#{room_message.created_at.strftime('%H:%M')} | #{room_message.created_at.strftime('%b %d')}"
+  - if room_message.user_id == current_user_id
+    = render "room_messages/outgoing_msg", room_message: room_message
   - else
-    .incoming_msg
-      .incoming_msg_img
-        img src="https://ptetutorials.com/images/user-profile.png"
-      .received_msg
-        .received_withd_msg
-          p
-            = room_message.message
-          span.time_date
-            = "#{room_message.created_at.strftime('%H:%M')} | #{room_message.created_at.strftime('%b %d')}"
+    = render "room_messages/incoming_msg", room_message: room_message

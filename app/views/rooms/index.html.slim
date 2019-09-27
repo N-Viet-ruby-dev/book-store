@@ -4,8 +4,8 @@
     .messaging#room-listener data-listener-id="#{current_user.id}"
       .inbox_msg
         .inbox_people
-          - if @rooms.present?
-            .inbox_chat
+          .inbox_chat
+            - if @rooms.present?
               = render partial: "rooms_list", collection: @rooms, as: :room
         .mesgs#room
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_031424) do
+ActiveRecord::Schema.define(version: 2019_09_27_054015) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -80,8 +80,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_031424) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "assignee_id"
-    t.boolean "assigned", default: false
-    t.boolean "processed", default: false
+    t.integer "guest_id"
     t.index ["name"], name: "index_rooms_on_name", unique: true
   end
 

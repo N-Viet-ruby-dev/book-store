@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :room_messages
   has_many :assigned_rooms, class_name: "Room", foreign_key: "assignee_id"
+  has_one :room, foreign_key: "guest_id"
   has_many :orders, dependent: :destroy
 
   validates :fullname, presence: true

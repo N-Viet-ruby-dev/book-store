@@ -6,12 +6,12 @@
 //= require cable
 
 $(document).ready(function(){
-  $("#addClass").click(function () {
+  $('#addClass').click(function () {
     $('#qnimate').addClass('popup-box-on');
-    $(this).css("display", "none");
+    $(this).css('display', 'none');
   });
-  $("#removeClass").click(function () {
+  $('#removeClass').click(function () {
     $('#qnimate').removeClass('popup-box-on');
-    $("#addClass").css("display", "block");
+    $('#addClass').css('display', 'block');
   });
 })

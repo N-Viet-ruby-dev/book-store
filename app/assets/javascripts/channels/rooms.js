@@ -2,21 +2,11 @@ var ScrollBot = function (selector){
   selector.scrollTop(selector[0].scrollHeight);
 };
 
-var AppendMessageHtml = function (data, messages){
-  if ( data['user_id'] == messages.data('user-id') ) {
-    html = "<div class='outgoing_msg'><div class='sent_msg'><p>" +
-      data['message'] + "</p><span class='time_date'>" +
-      data["hour_minute"] + " | " + data['month_day'] +
-      "</span></div></div>";
-    messages.append(html);
+var AppendMessage = function (data, messages){
+  if ( data.msg_user_id == messages.data('user-id') ) {
+    messages.append(data.incoming_msg);
   } else {
-    html = "<div class='incoming_msg'><div class='incoming_msg_img'>" +
-      "<img src='https://ptetutorials.com/images/user-profile.png'></div>" +
-      "<div class='received_msg'><div class='received_withd_msg'><p>" +
-      data['message'] + "</p><span class='time_date'>" +
-      data['hour_minute'] + " | " + data['month_day'] +
-      "</span></div></div></div>";
-    messages.append(html);
+    messages.append(data.outgoing_msg);
   }
 };
 
@@ -25,14 +15,14 @@ var CreateRoomChanel = function () {
   ScrollBot(messages);
   App.global_chat = App.cable.subscriptions.create(
     {
-      channel: "RoomsChannel",
+      channel: 'RoomsChannel',
       room_id: messages.data('room-id')
     },
     {
       connected() {},
       disconnected() {},
       received(data) {
-        AppendMessageHtml(data, messages);
+        AppendMessage(data, messages);
         ScrollBot(messages);
       },
       send_message(message, room_id) {

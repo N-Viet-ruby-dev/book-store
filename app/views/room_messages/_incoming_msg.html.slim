@@ -1,0 +1,9 @@
+.incoming_msg
+  .incoming_msg_img
+    = image_tag "user-profile.png"
+  .received_msg
+    .received_withd_msg
+      p
+        = room_message.message
+      span.time_date
+        = I18n.l(room_message.created_at, format: :short)

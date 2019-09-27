@@ -1,0 +1,6 @@
+.outgoing_msg
+  .sent_msg
+    p
+      = room_message.message
+    span.time_date
+      = I18n.l(room_message.created_at, format: :short)

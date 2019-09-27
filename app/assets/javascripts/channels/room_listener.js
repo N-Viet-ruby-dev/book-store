@@ -1,5 +1,5 @@
 var NotifyRoomListener = function (data) {
-  var room = $("#room_" + data['room_id']);
+  var room = $('#room_' + data['room_id']);
   if ( room.length > 0 ) {
     room.replaceWith(data['room']);
   } else {
@@ -12,7 +12,7 @@ $(document).ready(function (){
   if ( listener.length > 0 ) {
     App.global_listener = App.cable.subscriptions.create(
       {
-        channel: "RoomListenerChannel",
+        channel: 'RoomListenerChannel',
         listener_id: listener.data('listener-id')
       },
       {
