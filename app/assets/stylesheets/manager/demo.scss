@@ -74,14 +74,39 @@
 
 /*****charts******/
 
-.to_month_order, .to_day_order, #myChartByMonth {
+.to_month_order, .to_day_order, #myChartByMonth, .chart_oder_details {
   width: 100%;
 }
 
-.week-order {
+.week-order, #year, .charts-order, .option-from {
+  width: 100%;
+  display: -webkit-inline-box;
+}
+
+.from-year, .to-year {
   width: 50%;
 }
 
-.to_month_order {
+.with-compare {
+  font-size: 30px;
+  margin-top: 5px;
+}
+
+#year_2, .btn_compare {
+  display: none;
+}
+
+.to_month_order, .chart_oder_details {
   margin-top: 20px;
+}
+
+.chart_by_year {
+  display: none;
+}
+
+.vs-image {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  margin-left: -13px;
 }

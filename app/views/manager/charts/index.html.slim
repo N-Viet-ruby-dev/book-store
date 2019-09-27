@@ -1,7 +1,21 @@
 .row
-  .to_day_order
-    .form-group.week-order
-      = select_tag :year, options_for_select(@date), class: "form-control order-year"
-    canvas#myChart.chart_by_year
-  .to_month_order
-    canvas#myChartByMonth
+  .form-group.week-order.col-md-12
+    .option-year.col-md-5
+      = select_tag :year, options_for_select(@year), class: "form-control order-year"
+    .compare-year.col-md-1
+      = link_to "#", class: "with-year col-md-6" do
+        / i.fas.fa-arrow-circle-right.with-compare
+        = image_tag "vs.png", class: "vs-image"
+    .option-year.col-md-5
+      = select_tag :year_2, [], class: "form-control"
+    .btn-compare.col-md-1
+      = link_to "Compare", "#", class: "btn btn-info btn-sm btn_compare"
+  #charts.row
+    .col-md-12.to_day_order
+      canvas#myChart.chart_by_year
+    .col-md-12.to_month_order
+      canvas#myChartByMonth
+    .compare-charts.col-md-12
+      #compare-charts
+    .chart_oder_details
+      canvas#chartOrderDetails

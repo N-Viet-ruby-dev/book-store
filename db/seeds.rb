@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-
-100.times do |n|
+50.times do |n|
   Category.create!(name: "Category #{n}")
   Author.create!(name: "Author #{n}")
   Publisher.create!(name: "Publisher #{n}")
@@ -8,7 +7,7 @@
     password: "123123")
 end
 
-100.times do |n|
+3000.times do |n|
   Book.create!(name: "Book #{n}", price: Faker::Number.number(digits: 4),
                   total: Faker::Number.number(digits: 2), status: 0,
                   category_id: Category.all.sample.id,
@@ -16,13 +15,13 @@ end
                   publisher_id: Publisher.all.sample.id)
 end
 
-20.times do |n|
+1000.times do |n|
   Order.create!(total_price: Faker::Number.number(digits: 7),
     user_id: User.all.sample.id,
-    created_at: Faker::Date.between(from: 7.days.ago, to: Date.today))
+    created_at: Faker::Date.between(from: 1.year.ago, to: 1.year.from_now))
 end
 
-100.times do |n|
+2000.times do |n|
   book_id = Book.all.sample.id
   quantity = Faker::Number.number(digits: 1)
   OrderDetail.create!(order_id: Order.all.sample.id,
