@@ -1,0 +1,12 @@
+- unless current_user&.admin?
+  .container
+    .row
+      = link_to rooms_path, method: :post, remote: true, class: 'btn btn-primary', id: "addClass"
+        i.fab.fa-facebook-messenger
+
+  #qnimate.popup-box.chat-popup
+    .popup-head
+      button#removeClass.chat-header-button.pull-right data-widget="remove" type="button"
+        i.far.fa-times-circle
+    .popup-messages#messages
+    .popup-messages-footer#popup-form

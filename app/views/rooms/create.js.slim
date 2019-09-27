@@ -1,7 +1,10 @@
 - if @room.errors.any?
   | alert("#{@room}");
 - else
-  | $('#room').html("#{ j render @room }");
+  | $('#messages').html("#{ j render @room.room_messages, current_user_id: current_or_guest_user.id }");
+  | $('#messages').attr("data-room-id", #{ @room.id });
+  | $('#messages').attr("data-user-id", #{ current_or_guest_user.id });
+  | $('#popup-form').html("#{ j render "room_messages/message_form", room: @room }");
   | CreateRoomChanel();
 
 

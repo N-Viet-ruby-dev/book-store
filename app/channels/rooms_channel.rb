@@ -12,5 +12,6 @@ class RoomsChannel < ApplicationCable::Channel
     room = Room.find(data["room_id"])
     room.update_on_send_message(current_user)
     room.assign_to_admin unless room.assignee_id
+    RoomBroadcastJob.perform_later(room)
   end
 end

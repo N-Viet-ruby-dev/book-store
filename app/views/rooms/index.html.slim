@@ -1,9 +1,14 @@
-.row
-  .col-12.col-md-3
-    .mb-3
-      = link_to "Create a room", rooms_path, method: :post, remote: true, class: 'btn btn-primary'
+- if current_user
+  .container
+    h3.text-center Messaging
+    .messaging#room-listener data-listener-id="#{current_user.id}"
+      .inbox_msg
+        .inbox_people
+          .inbox_chat
+            - if @rooms.present?
+              = render partial: "rooms_list", collection: @rooms, as: :room
+        .mesgs#room
 
-    - if @rooms.present?
-      nav.nav.flex-column
-        = render partial: "rooms_list", collection: @rooms, as: :room
-  .col#room
+= render "shared/popup_chat"
+
+

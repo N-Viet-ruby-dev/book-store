@@ -1,1 +1,13 @@
-= link_to room.name, room_path(room), remote: true, class: "nav-link room-nav-link"
+= link_to room_path(room), id: "room_#{room.id}", remote: true do
+  .chat_list
+    .chat_people
+      .chat_img
+        = image_tag "user-profile.png"
+      .chat_ib.font-weight-bold
+        h5
+          = "Guest #{ room.guest.id if room.guest }"
+          span.chat_date
+            = I18n.l(room.room_messages.last.created_at, format: :short)
+        p
+          = room.room_messages.last.message
+

@@ -1,14 +1,5 @@
-.chat-message-container
-  .row.no-gutters
-    .col-auto.text-center
-      - if room_message.user
-        = room_message.user.email
-      - else
-        = "guest"
-    .col
-      .message-content
-        p.mb-1
-          = room_message.message
-        .text-right
-          small
-            = room_message.created_at
+- if room_message.id
+  - if room_message.user_id == current_user_id
+    = render "room_messages/outgoing_msg", room_message: room_message
+  - else
+    = render "room_messages/incoming_msg", room_message: room_message
