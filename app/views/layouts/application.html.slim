@@ -1,14 +1,21 @@
 doctype html
 html
   head
-    title
-      | BookStore
+    meta charset="UTF-8" /
+    title = t "book_store"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
   body class="container #{ current_or_guest_user.role }"
-    = render "shared/navbar"
-    = render "shared/flash"
-    = yield
-    = render "shared/footer"
+    .row
+      .col-12
+      = render "shared/header"
+    .row
+      .col-12
+        h1 = t "book_store"
+    .row
+      .col-3
+        = render partial: "shared/side_bar", locals: { categories: @categories, authors: @authors }
+      .col-9
+        = yield

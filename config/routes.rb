@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: "rooms#index"
+  root to: "books#home"
+
   devise_for :users
+
   resources :room_messages
   resources :rooms
+  resources :books
 
   mount ActionCable.server => '/cable'
 
@@ -20,4 +23,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  get "/home", to: "books#home"
+  get "/test", to: "books#test"
 end

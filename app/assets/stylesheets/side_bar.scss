@@ -1,0 +1,183 @@
+h3 {
+  font-family: "Bungee Inline", sans-serif;
+  font-weight: 400;
+  font-size: 3rem;
+  color: white;
+  transform: skewY(-5deg);
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+  position: relative;
+  word-spacing: 3px;
+}
+
+h3::before {
+  content: '';
+  display: block;
+  height: 65%;
+  width: 58%;
+  position: absolute;
+  top: 105%;
+  left: 50%;
+  background: linear-gradient(to bottom, #ff5454, #ffb2b2);
+  opacity: .8;
+  z-index: -1;
+  transform: skewY(370deg) translate(-50%, -50%);
+}
+
+.btn, .btn-small, .btn-small:link, .btn-small:visited {
+  background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
+  border-radius: 10rem;
+  border: none;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all .2s; }
+  .btn:hover, .btn-small:hover {
+    transform: scale(1.05); }
+  .btn:focus, .btn-small:focus {
+    outline: none; }
+  .btn > *:first-child, .btn-small > *:first-child {
+    margin-right: 1rem; }
+
+.btn {
+  padding: 1.3rem 3rem;
+  font-size: 1.4rem; }
+  .btn svg {
+    height: 2.25rem;
+    width: 2.25rem;
+    fill: currentColor; }
+
+.btn-small, .btn-small:link, .btn-small:visited {
+  font-size: 1.3rem;
+  padding: 1rem 1.75rem;
+  text-decoration: none; }
+  .btn-small svg, .btn-small:link svg, .btn-small:visited svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: currentColor; }
+
+.btn-inline {
+  color: #F59A83;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #F9F5F3;
+  padding: .8rem 1.2rem;
+  border-radius: 10rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all .2s; }
+  .btn-inline svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: currentColor;
+    margin: 0 .2rem; }
+  .btn-inline span {
+    margin: 0 .4rem; }
+  .btn-inline:hover {
+    color: #F48982;
+    background-color: #F2EFEE; }
+  .btn-inline:focus {
+    outline: none; }
+
+.btn-tiny {
+  height: 1.75rem;
+  width: 1.75rem;
+  border: none;
+  background: none;
+  cursor: pointer; }
+  .btn-tiny svg {
+    height: 100%;
+    width: 100%;
+    fill: #F59A83;
+    transition: all .3s; }
+  .btn-tiny:focus {
+    outline: none; }
+  .btn-tiny:hover svg {
+    fill: #F48982;
+    transform: translateY(-1px); }
+  .btn-tiny:active svg {
+    fill: #F48982;
+    transform: translateY(0); }
+  .btn-tiny:not(:last-child) {
+    margin-right: .3rem; }
+
+.sidebar {
+  background: #fff; }
+  .sidebar__list {
+    list-style: none; }
+  .sidebar__link:link, .sidebar__link:visited {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    transition: all .3s;
+    border-right: 1px solid #fff;
+    text-decoration: none; }
+  .sidebar__link:hover,
+  .likes__link:hover {
+    background-color: #F9F5F3;
+    transform: translateY(-2px); }
+  .sidebar__link--active,
+  .likes__link--active {
+    background-color: #F9F5F3; }
+  .sidebar__fig,
+  .likes__fig {
+    flex: 0 0 5.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 5.5rem;
+    margin-right: 2rem;
+    position: relative;
+    backface-visibility: hidden; }
+    .sidebar__fig::before,
+    .likes__fig::before {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: linear-gradient(to right bottom, #FBDB89, #F48982);
+      opacity: .4; }
+    .sidebar__fig img,
+    .likes__fig img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all .3s; }
+  .sidebar__name,
+  .likes__name {
+    font-size: 1.3rem;
+    color: #F59A83;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: .3rem; }
+  .sidebar__author,
+  .likes__author {
+    font-size: 1.1rem;
+    color: #968B87;
+    text-transform: uppercase;
+    font-weight: 600; }
+  .sidebar__pages,
+  .likes__pages {
+    margin-top: 3rem;
+    padding: 0 3rem; }
+    .sidebar__pages::after,
+    .likes__pages::after {
+      content: "";
+      display: table;
+      clear: both; }
+  .sidebar__btn--prev,
+  .likes__btn--prev {
+    float: left;
+    flex-direction: row-reverse; }
+  .sidebar__btn--next,
+  .likes__btn--next {
+    float: right; }
+
+

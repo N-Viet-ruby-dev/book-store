@@ -1,0 +1,8 @@
+.row
+  = render partial: "books", collection: @books, as: :book
+.row
+  .col-6.offset-3
+    .sidebar__pages
+    = link_to_prev_page @books, t("prev_page"), class: "btn-inline sidebar__btn--prev mr-40rem"
+    = link_to_next_page @books, t("next_page"), class: "btn-inline sidebar__btn--prev"
+
