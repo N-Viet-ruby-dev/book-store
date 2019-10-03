@@ -7,7 +7,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top.row
       ul.navbar-nav.ml-auto
         li class=("nav-item #{ active?(root_path) }")
           = link_to "Home", root_path, class: "nav-link"
-        - if current_user
+        - if current_or_guest_user.admin?
           li class=("nav-item #{ active?(destroy_user_session_path) }")
             = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link"
         - else

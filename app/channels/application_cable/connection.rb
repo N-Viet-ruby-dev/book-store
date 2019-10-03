@@ -11,10 +11,8 @@ module ApplicationCable
     protected
 
     def find_verified_user
-      if env["warden"].user
-        env["warden"].user
-      elsif cookies.signed[:guest_user_email]
-        User.find_by!(email: cookies.signed[:guest_user_email])
+      if verified_user = env["warden"].authenticate(:guest_user) || env["warden"].user
+        verified_user
       else
         reject_unauthorized_connection
       end

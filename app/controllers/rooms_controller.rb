@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   before_action :load_room, only: :show
 
   def index
-    @rooms = current_user.assigned_rooms if current_user&.admin?
+    @rooms = current_user.assigned_rooms.opening if current_user&.admin?
   end
 
   def show

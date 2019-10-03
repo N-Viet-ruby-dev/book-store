@@ -10,9 +10,19 @@ var AppendMessage = function (data, messages){
   }
 };
 
+var ActiveRoom = function (room_id) {
+  if ( $('.chat_list').length > 0 ) {
+    $('.chat_list').removeClass('active');
+    $('.chat_list#item_' + room_id).addClass('active');
+  };
+};
+
 var CreateRoomChanel = function () {
   var messages = $('#messages');
+
   ScrollBot(messages);
+  ActiveRoom(messages.data('room-id'));
+
   App.global_chat = App.cable.subscriptions.create(
     {
       channel: 'RoomsChannel',

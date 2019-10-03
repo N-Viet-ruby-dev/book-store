@@ -1,6 +1,6 @@
-- if room.guest
+- if room.opening? && room.guest
   = link_to room_path(room), id: "room_#{room.id}", remote: true do
-    .chat_list
+    div class="chat_list #{ room.room_messages.last.status }" id="item_#{ room.id }"
       .chat_people
         .chat_img
           = image_tag "user-profile.png"

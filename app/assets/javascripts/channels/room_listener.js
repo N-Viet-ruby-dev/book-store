@@ -1,7 +1,12 @@
 var NotifyRoomListener = function (data) {
-  var room = $('#room_' + data['room_id']);
+  var room = $('.chat_list#item_' + data['room_id']);
   if ( room.length > 0 ) {
-    room.replaceWith(data['room']);
+    if ( room[0].classList.contains('active') ) {
+      room.replaceWith(data['room']);
+      $('.chat_list#item_' + data['room_id']).addClass('active');
+    } else {
+      room.replaceWith(data['room']);
+    };
   } else {
     $('#room-listener .inbox_chat').append(data['room']);
   }
