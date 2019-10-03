@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 
     resources :charts do
       collection do
-        get "order_by_month"
-        get "order_by_year"
+        get "revenue_in_month"
+        get "revenue_in_year"
+        get "select_to_year"
+        get "compare_between_year"
       end
     end
   end
