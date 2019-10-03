@@ -19,10 +19,10 @@ class Room < ApplicationRecord
   end
 
   class << self
-    def close_guest_room guest_id
+    def close_guest_room(guest_id)
       guest_room = find_by(guest_id: guest_id)
       guest_room.closed!
-      RoomBroadcastJob.perform_later(guest_room, "guest")
+      RoomBroadcastJob.perform_later(guest_room)
     end
   end
 end

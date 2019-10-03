@@ -4,7 +4,7 @@ module AuthorizationHelper
   def current_or_guest_user
     if current_user
       if session[:guest_user_id] && session[:guest_user_id] != current_user.id
-        guest_user(with_retry = false).try(:reload).try(:destroy)
+        guest_user(false).try(:reload).try(:destroy)
         session[:guest_user_id] = nil
       end
       current_user
@@ -23,10 +23,9 @@ module AuthorizationHelper
   private
 
   def create_guest_user
-    u = User.new(:fullname => "guest", :email => "guest_#{Time.now.to_i}#{rand(100)}@example.com")
-    u.save!(:validate => false)
+    u = User.new(fullname: "guest", email: "guest_#{Time.now.to_i}#{rand(100)}@example.com")
+    u.save!(validate: false)
     session[:guest_user_id] = u.id
     u
   end
-
 end

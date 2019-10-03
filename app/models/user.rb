@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
     assigned_rooms.opening.each do |room|
       User.select_assignee.assigned_rooms << room
-      RoomBroadcastJob.perform_later(room, role)
+      RoomBroadcastJob.perform_later(room)
     end
   end
 
@@ -29,9 +29,8 @@ class User < ApplicationRecord
 
   def open_guest_room
     guest_room.opening!
-    RoomBroadcastJob.perform_later(guest_room, role)
+    RoomBroadcastJob.perform_later(guest_room)
   end
-
 
   class << self
     def select_assignee
