@@ -1,4 +1,4 @@
-- if current_user
+- if current_or_guest_user.admin?
   .container
     h3.text-center Messaging
     .messaging#room-listener data-listener-id="#{current_user.id}"
@@ -12,3 +12,4 @@
 = render "shared/popup_chat"
 
 
+= current_user.inspect

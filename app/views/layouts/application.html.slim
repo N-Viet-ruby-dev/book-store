@@ -7,7 +7,7 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
-  body.container
+  body class="container #{ current_or_guest_user.role }"
     = render "shared/navbar"
     = render "shared/flash"
     = yield

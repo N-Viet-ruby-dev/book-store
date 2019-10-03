@@ -14,21 +14,22 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def re_assign_room
+  def reassign_room
     return if online? || (Time.now - updated_at < Settings.reassign_time_minute.minutes)
 
-    assigned_rooms.each do |room|
+    assigned_rooms.opening.each do |room|
       User.select_assignee.assigned_rooms << room
       RoomBroadcastJob.perform_later(room)
     end
   end
 
-  def closed_or_reassigned_room
-    if guest? && guest_room.present?
-      guest_room.closed!
-    elsif admin? && assigned_rooms.present?
-      delay(run_at: Settings.reassign_time_minute.minutes.from_now).re_assign_room
-    end
+  def delay_reassign_room
+    delay(run_at: Settings.reassign_time_minute.minutes.from_now).reassign_room
+  end
+
+  def open_guest_room
+    guest_room.opening!
+    RoomBroadcastJob.perform_later(guest_room)
   end
 
   class << self

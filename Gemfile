@@ -23,6 +23,8 @@ gem "chartjs-ror", "~> 3.6.4"
 gem "config"
 gem "font-awesome-sass", "~> 5.11.2"
 gem "delayed_job_active_record", "~> 4.1"
+gem "warden", "~> 1.2"
+gem "whenever", require: false
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

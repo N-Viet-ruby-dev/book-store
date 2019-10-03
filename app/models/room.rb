@@ -17,4 +17,12 @@ class Room < ApplicationRecord
   def update_on_send_message(user)
     room_messages.unprocessed.update_all(status: :processed) if user.admin?
   end
+
+  class << self
+    def close_guest_room(guest_id)
+      guest_room = find_by(guest_id: guest_id)
+      guest_room.closed!
+      RoomBroadcastJob.perform_later(guest_room)
+    end
+  end
 end

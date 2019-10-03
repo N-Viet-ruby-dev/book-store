@@ -2,23 +2,30 @@
 
 module AuthorizationHelper
   def current_or_guest_user
-    current_user || guest_user
+    if current_user
+      if session[:guest_user_id] && session[:guest_user_id] != current_user.id
+        guest_user(false).try(:reload).try(:destroy)
+        session[:guest_user_id] = nil
+      end
+      current_user
+    else
+      guest_user
+    end
   end
 
-  def guest_user
-    @cached_guest_user ||=
-      User.find_by!(email: (cookies.signed[:guest_user_email] || create_guest_user.email))
+  def guest_user(with_retry = true)
+    @cached_guest_user ||= User.find(session[:guest_user_id] ||= create_guest_user.id)
   rescue ActiveRecord::RecordNotFound
-    cookies.delete :guest_user_email
-    guest_user
+    session[:guest_user_id] = nil
+    guest_user if with_retry
   end
 
   private
 
   def create_guest_user
-    user = User.create(fullname: "guest", email: "guest_#{Time.now.to_i}#{rand(99)}@example.com")
-    cookies.signed[:guest_user_email] = { value: user.email, expires: 1.month.from_now }
-    user.save!(validate: false)
-    user
+    u = User.new(fullname: "guest", email: "guest_#{Time.now.to_i}#{rand(100)}@example.com")
+    u.save!(validate: false)
+    session[:guest_user_id] = u.id
+    u
   end
 end

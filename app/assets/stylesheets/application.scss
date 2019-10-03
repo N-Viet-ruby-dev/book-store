@@ -183,6 +183,11 @@ img{ max-width:100%;}
   margin: 0;
   padding: 18px 16px 10px;
 }
+
+.chat_list .active {
+  border: solid;
+}
+
 .inbox_chat { height: 550px; overflow-y: scroll;}
 
 .active_chat{ background:#ebebeb;}
@@ -418,4 +423,16 @@ a#addClass {
   position: fixed;
   right: 10px;
   top: 40%;
+}
+
+.chat_list.processed {
+  background: #fff;
+}
+
+.chat_list.unprocessed {
+  background: #aecdfc;
+}
+
+.chat_list.active {
+    border: 2px solid red;
 }
