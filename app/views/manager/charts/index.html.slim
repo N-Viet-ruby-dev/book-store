@@ -1,5 +1,6 @@
 .row
-  h3 Charts Total Revenue The Year
+  = link_to t(".statistical_book"), manager_chart_books_path, class: "statistical_books"
+  h3 = t ".revenue_the_year"
   .form-group.week-order.col-md-12
     .option-year.col-md-5
       = select_tag :year, options_for_select(@year), class: "form-control order-year year_1"
@@ -9,12 +10,12 @@
       = select_tag :year, [], class: "form-control order-year year_2"
   #charts.row
     .col-md-12.pieChart
-    h3 Select Year To Compare
+    h3 = t ".select_year"
     .col-md-12.week-order
       .option-year.col-md-5
         = select_tag :year, options_for_select(@year), class: "form-control year-1"
     .col-md-12.to_day_order
       canvas#myChart.chart_by_year
     .col-md-12.to_month_order
-      h3 Charts Total Revenue In Month Of Year
+      h3 = t ".revenue_in_month"
       canvas#myChartByMonth

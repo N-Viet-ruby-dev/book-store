@@ -16,12 +16,21 @@ Rails.application.routes.draw do
   namespace :manager do
     root "charts#index"
 
-    resources :charts do
+    resources :charts, only: :index do
       collection do
         get "revenue_in_month"
         get "revenue_in_year"
         get "select_to_year"
         get "compare_between_year"
+      end
+    end
+
+    resources :chart_books, only: :index do
+      collection do
+        get "best_selling_books"
+        get "best_selling_books_in_month"
+        get "book_has_biggest_revenue"
+        get "book_has_biggest_revenue_in_month"
       end
     end
   end

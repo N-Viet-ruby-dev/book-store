@@ -2,6 +2,7 @@ $(document).ready(function() {
   var yearChart;
   var monthChart;
   var totalChart;
+  var bookChartInYear;
 
   refreshPage();
 
@@ -121,6 +122,120 @@ $(document).ready(function() {
     }
   });
 
+  // Top book has biggest revenue
+  $('.sell1').click(function() {
+    var year = $(this).val()
+    if (year) {
+      $.ajax({
+        url: '/manager/chart_books/book_has_biggest_revenue',
+        type: 'GET',
+        dataType: 'JSON',
+        data: {
+          year: year
+        },
+        success: function(data) {
+          $('#month').empty();
+          for(var i in data.month) {
+            var option = '<option value=' + data.month[i] + '>' + data.month[i] + '</option>';
+            $('#month').append(option);
+          }
+          $('#book_has_big_revenue').remove();
+          $('.book_has_big_revenue').append('<canvas id="book_has_big_revenue"></canvas>');
+          var keys = Object.keys(data.top);
+          var values = Object.values(data.top);
+          var ctx = $('#book_has_big_revenue');
+          var color = getRandomColor();
+          responseBarChart('bar', keys, values, year, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
+        }
+      });
+    } else {
+      return false;
+    }
+  });
+
+  // Top book has biggest revenue by month
+  $('#month').click(function() {
+    var year = $('.sell1').val();
+    var month = $(this).val();
+    if (year && month) {
+      $.ajax({
+        url: '/manager/chart_books/book_has_biggest_revenue_in_month',
+        type: 'GET',
+        dataType: 'JSON',
+        data: {
+          year: year,
+          month: month
+        },
+        success: function(data) {
+          $('#book_has_big_revenue_in_month').remove();
+          $('.book_has_big_revenue_in_month').append('<canvas id="book_has_big_revenue_in_month"></canvas>');
+          var keys = Object.keys(data);
+          var values = Object.values(data);
+          var ctx = $('#book_has_big_revenue_in_month');
+          var color = getRandomColor();
+          responseBarChart('bar', keys, values, year, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
+        }
+      });
+    } else {
+      return false;
+    }
+  });
+
+  // Chart best selling book in month of year
+  $(document).on('click', '#best_sell_book_in_year', function(evt) {
+    var activePoint = bookChartInYear.getElementAtEvent(evt)[0];
+    var year = activePoint['_model'].datasetLabel;
+    var book = activePoint['_model'].label;
+    if (year && book) {
+      $.ajax({
+        url: '/manager/chart_books/best_selling_books_in_month',
+        type: 'GET',
+        dataType: 'JSON',
+        data: {
+          book: book,
+          year: year
+        },
+        success: function(data) {
+          $('#best_sell_book_in_month').remove();
+          $('.best_sell_book_in_month').append('<canvas id="best_sell_book_in_month"></canvas>');
+          var keys = Object.keys(data);
+          var values = Object.values(data);
+          var ctx = $('#best_sell_book_in_month');
+          var color = getRandomColor();
+          responseBarChart('bar', keys, values, book, 'Quantity sold per month', ctx, color, color, color, 'Month', 'Quantity Books' );
+        }
+      });
+    } else {
+      return false;
+    }
+  });
+
+  // Chart best selling books in year
+  $('.select_year').click(function() {
+    var year = $(this).val();
+    if (year) {
+      $.ajax({
+        url: '/manager/chart_books/best_selling_books',
+        type: 'GET',
+        dataType: 'JSON',
+        data: {
+          year: year
+        },
+        success: function(data) {
+          $('#best_sell_book_in_year').remove();
+          $('.best_sell_book_in_year').append('<canvas id="best_sell_book_in_year"></canvas>');
+          var keys = Object.keys(data);
+          var values = Object.values(data);
+          var ctx = $('#best_sell_book_in_year');
+          var color = getRandomColor();
+          bookChartInYear = responseBarChart('horizontalBar', keys, values, year, 'Best Selling Books '+year , ctx, color, color, color, 'Quantity Books', 'Books' );
+        }
+      });
+    } else {
+      return false;
+    }
+  });
+
   // auto load ajax after load page, displayed order by the year
   function refreshPage() {
     var year = (new Date).getFullYear().toString();
@@ -138,6 +253,41 @@ $(document).ready(function() {
         var values = Object.values(data);
         var ctx = $('#myChart');
         yearChart = responseBarChart('bar', keys, values, year, 'Revenue In ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Month', 'Currency($)');
+      }
+    });
+
+    $.ajax({
+      url: '/manager/chart_books/best_selling_books',
+      type: 'GET',
+      dataType: 'JSON',
+      data: {
+        year: year
+      },
+      success: function(data) {
+        $('#best_sell_book_in_year').remove();
+        $('.best_sell_book_in_year').append('<canvas class="best_sell_book_in_year" id="best_sell_book_in_year"></canvas>');
+        var keys = Object.keys(data);
+        var values = Object.values(data);
+        var ctx = $('#best_sell_book_in_year');
+        bookChartInYear = responseBarChart('horizontalBar', keys, values, year, 'Best Selling Books ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Number Books', 'Books');
+      }
+    });
+
+    $.ajax({
+      url: '/manager/chart_books/book_has_biggest_revenue',
+      type: 'GET',
+      dataType: 'JSON',
+      data: {
+        year: year
+      },
+      success: function(data) {
+        $('#book_has_big_revenue').remove();
+        $('.book_has_big_revenue').append('<canvas id="book_has_big_revenue"></canvas>');
+        var keys = Object.keys(data.top);
+        var values = Object.values(data.top);
+        var ctx = $('#book_has_big_revenue');
+        var color = getRandomColor();
+        responseBarChart('bar', keys, values, year, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
       }
     });
 
@@ -250,7 +400,7 @@ $(document).ready(function() {
     return chartByYear;
   };
 
-  function responsePieChart(key, value, title='', ctx, color) {
+  function responsePieChart(key, value, title='', ctx, bgcolor) {
     var chart = new Chart(ctx, {
       type: 'doughnut',
       data: {
@@ -258,9 +408,9 @@ $(document).ready(function() {
         datasets: [
           {
             label: key,
-            backgroundColor: color,
+            backgroundColor: bgcolor,
             data: value,
-            borderColor: color,
+            borderColor: bgcolor,
             fill: false
           }
         ]
@@ -274,7 +424,7 @@ $(document).ready(function() {
         legend: {
           display: true,
           labels: {
-            fontColor: color
+            fontColor: "#000"
           }
         }
       }

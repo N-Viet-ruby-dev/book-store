@@ -1,0 +1,21 @@
+.row
+  = link_to t(".statistical_revenue"), manager_charts_path, class: "statistical_revenue"
+  .best_sell_book_in_year.col-md-12
+    .chart_title
+      h3 = t ".best_sell_year"
+    .select_option_year.row
+      .select_year.col-md-6
+        = select_tag :year, options_for_select(@year), class: "select_year form-control"
+    canvas#best_sell_book_in_year
+  .best_sell_book_in_month.col-md-12
+  .compare_between_year
+    h3 = t ".big_revenue"
+    .row.select_option_year
+      .select_year.col-md-6
+        = select_tag :year, options_for_select(@year), class: "sell1 form-control"
+      .select_year.col-md-6
+        = select_tag :month, [], class: "month form-control"
+    .row.book_has_big_revenue
+      canvas#book_has_big_revenue
+    .row.book_has_big_revenue_in_month
+      canvas#book_has_big_revenue_in_month

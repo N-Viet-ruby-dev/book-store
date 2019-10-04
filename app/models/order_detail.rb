@@ -21,4 +21,22 @@ class OrderDetail < ApplicationRecord
   def update_price
     self.price = quantity * book.price
   end
+
+  scope :top_total, lambda { |year|
+    joins(:order).where("YEAR(orders.created_at) = ? AND orders.status = 1", year)
+                 .group("(order_details.book_id)").order("total desc")
+                 .pluck(Arel.sql("DISTINCT SUM(order_details.quantity) as total"))[4]
+  }
+
+  scope :top_total_price, lambda { |year|
+    joins(:order).where("YEAR(orders.created_at) = ? AND orders.status = 1", year)
+                 .group("(order_details.book_id)").order("total_price desc")
+                 .pluck(Arel.sql("DISTINCT SUM(order_details.price) as total_price"))[9]
+  }
+
+  scope :top_total_price_in_month, lambda { |year, month|
+    joins(:order).where("YEAR(orders.created_at) = ? AND MONTH(orders.created_at) = ? AND orders.status = 1", year, month)
+                 .group("(order_details.book_id)").order("total_price desc")
+                 .pluck(Arel.sql("DISTINCT SUM(order_details.price) as total_price"))[0]
+  }
 end
