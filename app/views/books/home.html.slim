@@ -1,0 +1,99 @@
+.navigation
+  input#navi-toggle.navigation__checkbox type="checkbox"
+  label.navigation__button for="navi-toggle"
+    span.navigation__icon  
+  .navigation__background  
+  nav.navigation__nav
+    ul.navigation__list
+      = nav_helper
+header.header
+  .header__text-box
+    h1.heading-primary
+      span.heading-primary--main = t "books"
+      span.heading-primary--sub = t "change_world"
+    = link_to t("discover"), "#section-tours", class: "btn btn--white btn--animated"
+main
+  section.section-about
+    .u-center-text.u-margin-bottom-big
+      h2.heading-secondary = t "exciting_books"
+    .row
+      .col-1-of-2
+        - @exciting_books.each do |book|
+          = link_to book_path(book) do
+            h3.heading-tertiary.u-margin-bottom-small
+              = book.name
+          p.paragraph
+            = book.description
+
+      .col-1-of-2
+        .composition
+          - @exciting_books.each_with_index do |book, index|
+            = image_tag( book.image_url, { srcset: [[book.image_url, "300w"], [book.image_url, "1000w"]],
+              sizes: "(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 300px",
+              class: "composition__photo composition__photo--p#{index}" } )
+
+  section.section-features
+    .u-center-text.u-margin-bottom-big
+      h2.heading-secondary = t "category"
+    .row
+      - @categories.each do |category|
+          .col-1-of-4
+            .feature-box
+              i.feature-box__icon.icon-basic-book-pencil
+              h3.heading-tertiary.u-margin-bottom-small = category.name
+              p.feature-box__text = category.description
+
+    .u-center-text.u-margin-top-huge
+      = link_to t("category"), "#", class: "btn-text"
+
+  section#section-tours.section-tours
+    .u-center-text.u-margin-bottom-big
+      h2.heading-secondary = t "best_seller"
+    .row
+      - @best_sellers.each_with_index do |best_seller, index|
+        .col-1-of-3
+          .card
+            .card__side.card__side--front
+              .card__picture
+                = image_tag best_seller.image_url
+              h4.card__heading
+                span class="card__heading-span card__heading-span--#{ index }"
+                  = best_seller.name
+              .card__details
+                ul
+                  li = best_seller.author.name
+                  li = best_seller.publisher.name
+
+            div class="card__side card__side--back card__side--back-#{ index }"
+              .card__cta
+                .card__price-box
+                  p.card__price-only = t "only"
+                  p.card__price-value = number_to_currency(best_seller.price, precision: 0)
+                = link_to t("book_now"), book_path(best_seller), class: "btn btn--white"
+
+    .u-center-text.u-margin-top-huge
+      = link_to t("all_books"), books_path, class: "btn btn--green"
+  section.section-stories
+    .bg-video
+      = video_tag( t("bg_video"),
+          class: 'bg-video__content',
+          autoplay: true,
+          loop: true,
+          muted: true,
+        )
+    .u-center-text.u-margin-bottom-big
+      h2.heading-secondary
+        = t "authors"
+    - @authors.each do |author|
+      .row
+        .story
+          figure.story__shape
+            = image_tag author.image_url, class: "story__img"
+            figcaption.story__caption = author.name
+          .story__text
+            p = author.description
+
+    .u-center-text.u-margin-top-huge
+      = link_to t("authors"), "#", class: "btn-text"
+
+= render "shared/footer"

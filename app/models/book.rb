@@ -6,4 +6,6 @@ class Book < ApplicationRecord
   belongs_to :publisher
   has_many :order_details, dependent: :destroy
   has_many :orders, through: :order_details
+
+  enum status: { available: 0, unavailable: 1 }
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class RoomsController < ApplicationController
+  layout "manager", only: :index
   before_action :load_room, only: :show
 
   def index

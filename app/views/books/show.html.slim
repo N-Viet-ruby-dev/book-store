@@ -1,0 +1,14 @@
+.row
+  .col-8
+    figure.book
+      p.book__price
+        = number_to_currency(@book.price, precision: 0)
+      = link_to books_path, class: "book__back" do
+        span.emoji-left> 👈
+        = t "back"
+      .book__hero
+        = image_tag @book.image_url, class: "book__img"
+      = link_to "#", class: "book__link" do
+        = t("buy_now_for", price: number_to_currency(@book.price, precision: 0))
+        span.emoji-right 🥳 😍
+  .col-4

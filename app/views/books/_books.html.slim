@@ -1,0 +1,16 @@
+.col-4
+  figure.card
+    .card__hero
+      = image_tag book.image_url, class: "card__img"
+    h2.card__name = book.name
+    p.card__detail
+      span.emoji-left 👨‍⚖️
+      = book.author.name
+    p.card__detail
+      span.emoji-left 👨‍⚖️
+      = book.publisher.name
+    .card__footer
+      p.card__price = number_to_currency( book.price, precision: 0 )
+      = link_to book_path(book), class: "card__link" do
+        = t "check_out"
+        span.emoji-right 👉
