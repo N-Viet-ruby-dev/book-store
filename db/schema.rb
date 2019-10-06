@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_02_132319) do
+ActiveRecord::Schema.define(version: 2019_10_07_004216) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_132319) do
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.float "price"
-    t.integer "total"
+    t.integer "quantity"
     t.integer "status"
     t.bigint "category_id"
     t.bigint "author_id"
@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(version: 2019_10_02_132319) do
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["category_id"], name: "index_books_on_category_id"
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
+  end
+
+  create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -66,12 +71,14 @@ ActiveRecord::Schema.define(version: 2019_10_02_132319) do
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cart_id"
     t.index ["book_id"], name: "index_order_details_on_book_id"
+    t.index ["cart_id"], name: "index_order_details_on_cart_id"
     t.index ["order_id"], name: "index_order_details_on_order_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.float "total_price"
+    t.float "total_price", default: 0.0
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -129,6 +136,7 @@ ActiveRecord::Schema.define(version: 2019_10_02_132319) do
   add_foreign_key "books", "categories"
   add_foreign_key "books", "publishers"
   add_foreign_key "order_details", "books"
+  add_foreign_key "order_details", "carts"
   add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "room_messages", "rooms"

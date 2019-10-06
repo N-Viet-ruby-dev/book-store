@@ -7,12 +7,11 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
-  body class="container #{ current_or_guest_user.role }"
+  body class="#{ current_or_guest_user.role }"
     .row
       .col-12
-      = render "shared/header"
-    .row
-      .col-12
+        = render "shared/header"
+        = render "shared/flash"
         h1 = t "book_store"
     .row
       .col-3

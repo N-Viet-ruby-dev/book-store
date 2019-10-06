@@ -67,14 +67,10 @@ h3::before {
   padding: .8rem 1.2rem;
   border-radius: 10rem;
   cursor: pointer;
-  display: flex;
+  display: block;
   align-items: center;
-  transition: all .2s; }
-  .btn-inline svg {
-    height: 1.5rem;
-    width: 1.5rem;
-    fill: currentColor;
-    margin: 0 .2rem; }
+  transition: all .2s;
+  margin: 0;}
   .btn-inline span {
     margin: 0 .4rem; }
   .btn-inline:hover {
@@ -172,12 +168,10 @@ h3::before {
       content: "";
       display: table;
       clear: both; }
-  .sidebar__btn--prev,
-  .likes__btn--prev {
+  .sidebar__btn--prev {
     float: left;
     flex-direction: row-reverse; }
-  .sidebar__btn--next,
-  .likes__btn--next {
+  .sidebar__btn--next {
     float: right; }
 
 

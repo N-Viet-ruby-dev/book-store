@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   resources :room_messages
   resources :rooms
-  resources :books
+  resources :books, only: [:index, :show]
+  resources :orders, only: [:new, :create]
+  resources :carts, only: :update
 
   mount ActionCable.server => '/cable'
 
@@ -24,6 +26,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/home", to: "books#home"
-  get "/test", to: "books#test"
+  post "/add_book", to: "carts#add_book"
 end

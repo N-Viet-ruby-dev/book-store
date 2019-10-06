@@ -3,6 +3,7 @@
 @import "font-awesome";
 @import url("https://fonts.googleapis.com/css?family=Bungee+Inline|Nunito+Sans");
 @import "side_bar";
+@import "gritter";
 
 *,
 *::before,
@@ -83,6 +84,7 @@ h1::before {
 }
 
 .card__name {
+  height: 80px;
   background: linear-gradient(to right, #67b26f, #4ca2cd);
   padding: 1.3rem .8rem;
   margin: 0;
@@ -167,6 +169,7 @@ h1::before {
 .book__img {
   width: 100%;
   display: block;
+  height: 80rem;
 }
 
 .book__price {
@@ -716,8 +719,100 @@ a#addClass {
 .chat_list.active {
     border: 2px solid red;
 }
+
+/* Cart */
+.heading-2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #F59A83;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  transform: skewY(-3deg); }
+
+
+.shopping {
+  background: #fff;
+  display: block;
+  padding: 3rem 2rem 6rem;}
+  .shopping__list {
+    list-style: none;
+    max-height: 77rem;
+    overflow-y: scroll; }
+  .shopping__item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.3rem 0;
+    border-bottom: 1px solid #F2EFEE;
+    position: relative; }
+  .shopping__count {
+    flex: 0 0 7.5rem;
+    padding: .4rem .5rem;
+    border: 1px solid #F2EFEE;
+    border-radius: 3px;
+    margin-right: 2rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between; }
+    .shopping__count input {
+      color: inherit;
+      font-family: inherit;
+      font-size: 1.2rem;
+      text-align: center;
+      border: none;
+      width: 100%;
+      border-radius: 3px; }
+      .shopping__count input:focus {
+        outline: none;
+        background-color: #F2EFEE; }
+    .shopping__count input, p {
+      font-size: 2rem;
+      margin: 0;}
+  .shopping__description {
+    flex: 1;
+    font-size: 2rem;
+    margin-top: .4rem;
+    margin-right: 1.5rem; }
+  .shopping__item:hover .shopping__delete {
+    opacity: 1;
+    visibility: visible; }
+
+
 /* Custom */
 
 .mr-40rem {
   margin-right: 40rem;
+}
+
+.sidebar__pages.btn_right {
+  float: right;
+}
+.sidebar__pages.btn_left {
+  float: left;
+}
+
+span.text_left {
+  display: block;
+  float: left;
+  width: 25rem;
+}
+
+span.text_right {
+  display: block;
+  float: right;
+  margin-right: 10px
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.btn-left {
+  display: block;
+  float: left;
+}
+
+.btn-right {
+  display: block;
+  float: right;
 }

@@ -51,3 +51,8 @@ en:
   prev_page: "Prev page"
   next_page: "Next page"
   book_store: "The book store!"
+  exceed_limit: "exceeds the limit"
+  invalid_book: "Invalid book"
+  order_present: "Order details present"
+  not_available: "is not available"
+  cart_updated: "Your cart updated!!"
