@@ -3,6 +3,7 @@
 class BooksController < ApplicationController
   layout "home_books", only: "home"
   include CurrentCart
+  include LoadEntity
   before_action :load_entity, only: %i[index show]
   before_action :load_cart
 
@@ -18,13 +19,5 @@ class BooksController < ApplicationController
     @exciting_books = Book.limit(3)
     @best_sellers = Book.select("books.*, SUM(order_details.quantity) sum").joins(:order_details)
                         .group(:id).order(sum: :desc).limit(3)
-  end
-
-  private
-
-  def load_entity
-    @book = Book.find(params[:id]) if params[:id]
-    @categories = Category.limit(5)
-    @authors = Author.limit(5)
   end
 end

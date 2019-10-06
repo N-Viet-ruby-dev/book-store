@@ -14,7 +14,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 65%;
   box-sizing: border-box;
 }
 
@@ -51,6 +51,11 @@ h1::before {
   opacity: .8;
   z-index: -1;
   transform: skewY(370deg) translate(-50%, -50%);
+}
+
+input {
+  height: 40px !important;
+  font-size: 1.5rem !important;
 }
 
 .container {
@@ -816,3 +821,8 @@ span.text_right {
   display: block;
   float: right;
 }
+
+.bill_address {
+  padding: 4rem;
+}
+
