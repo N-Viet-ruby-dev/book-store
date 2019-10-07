@@ -1,0 +1,19 @@
+li.shopping__item id="item_#{ detail.book.id }"
+
+  = f.hidden_field :id, value: detail.id
+
+  .shopping__count
+    = f.number_field :quantity, { value: detail.quantity,
+                                  min: 1,
+                                  max: detail.book.quantity,
+                                  step: 1,
+                                  "data-price" =>  detail.book.price,
+                                  class: "num_input" }
+  p.shopping__description
+    span.text_left
+      = detail.book.name
+    span.text_right
+      i.fa.fa-trash.clickable data-id="#{detail.book.id}"
+      = f.hidden_field :_destroy, value: false, id: "delete_item_#{detail.book.id}"
+    span.text_right.price
+      = number_to_currency(detail.price, precision: 0)

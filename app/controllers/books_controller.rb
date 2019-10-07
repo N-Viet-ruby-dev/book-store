@@ -2,8 +2,9 @@
 
 class BooksController < ApplicationController
   layout "home_books", only: "home"
-
+  include CurrentCart
   before_action :load_entity, only: %i[index show]
+  before_action :load_cart
 
   def index
     @books = Book.includes(:author, :publisher).page(params[:page]).per(9)

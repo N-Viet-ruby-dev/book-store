@@ -1,3 +1,6 @@
-.row
-  - flash.each do |message_type, message|
-    div class=("col-12 alert alert-#{message_type}") = message
+- if flash[:alert]
+  = js add_gritter(flash[:alert], title: "The Book Store", sticky: false)
+- elsif flash[:error]
+  = js add_gritter(flash[:error], title: "The Book Store", sticky: false)
+- else
+  = js add_gritter(flash[:notice], title: "The Book Store", sticky: false)

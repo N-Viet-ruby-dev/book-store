@@ -1,5 +1,5 @@
 .row
-  .col-8
+  .col-7
     figure.book
       p.book__price
         = number_to_currency(@book.price, precision: 0)
@@ -8,7 +8,20 @@
         = t "back"
       .book__hero
         = image_tag @book.image_url, class: "book__img"
-      = link_to "#", class: "book__link" do
+      = link_to add_book_path( book_id: @book.id ),
+                method: :post, class: "book__link", remote: true do
         = t("buy_now_for", price: number_to_currency(@book.price, precision: 0))
         span.emoji-right 🥳 😍
-  .col-4
+  .col-5
+    .shopping
+      h2.heading-2 My Shopping List
+      = form_for @cart, url: cart_path(@cart), method: :patch, remote: true do |f|
+        ul.shopping__list
+          = f.fields_for :order_details do |ff|
+            = render partial: "shared/order_detail", locals: { f: ff, detail: ff.object }
+
+        = f.button "Update", class: "btn btn-left"
+
+      = button_to new_order_path, method: :get, class: "btn btn-right" do
+        = t("all_category")
+
