@@ -1,0 +1,15 @@
+#login
+  .container
+    #login-row.row.justify-content-center.align-items-center
+      #login-column.col-md-6
+        #login-box.col-md-12
+          = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, class: "user") do |f|
+            h3.text-center.text-info = t ".reset_password"
+            = render "shared/manager/error_messages", object: resource
+            .form-group
+              = f.label t(".email"), class: "control-label"
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-user"
+            .actions
+              = f.submit t(".reset_btn"), class: "btn btn-primary btn-user btn-block"
+          .text-center
+            = link_to t(".sign_in"), new_user_session_path, class: "small"

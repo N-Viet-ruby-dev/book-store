@@ -32,6 +32,15 @@ en:
   total_usd: "Total (USD)"
   billing: "Billing address"
   continue_checkout: "Continue to checkout"
+  information: "Information:"
+  invoice_order: "Invoice order #%{order_id} (%{status})"
+  order_summary: "Order summary"
+  item: "Item"
+  price: "Price"
+  quantity: "Quantity"
+  totals: "Totals"
+  order_success: "Your order #%{order_id} was successfully processed...See more!"
+  order_unsuccess: "Your order #%{order_id} was unsuccessfully processed...See more!"
   manager:
     charts:
       index:
@@ -44,12 +53,25 @@ en:
         statistical_revenue: "Charts Statistical Revenue"
         best_sell_year: "Chart Best Selling Books In Year"
         big_revenue: "Book has the biggest revenue"
-  information: "Information:"
-  invoice_order: "Invoice order #%{order_id} (%{status})"
-  order_summary: "Order summary"
-  item: "Item"
-  price: "Price"
-  quantity: "Quantity"
-  totals: "Totals"
-  order_success: "Your order #%{order_id} was successfully processed...See more!"
-  order_unsuccess: "Your order #%{order_id} was unsuccessfully processed...See more!"
+    sessions:
+      new:
+        sign_in: "Sign In"
+        email: "Email"
+        password: "Password"
+        remember: "Remember me"
+        pass_reset: "(Reset Password)"
+    passwords:
+      new:
+        reset_password: "Reset Password"
+        email: "Email"
+        reset_btn: "Reset Password"
+        sign_in: "Sign In"
+      edit:
+        reset_btn: "Reset Password"
+        password: "Password"
+        pass_confirm: "Password Confirmation"
+        change_btn: "Reset Password"
+  shared:
+    manager:
+      top:
+        logout: "Logout"

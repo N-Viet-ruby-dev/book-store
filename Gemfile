@@ -27,6 +27,7 @@ gem "warden", "~> 1.2"
 gem "whenever", require: false
 gem "kaminari", "~> 1.1"
 gem "gritter", "~> 1.2"
+gem "figaro"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

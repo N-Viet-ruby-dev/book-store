@@ -1,0 +1,21 @@
+#login
+  .container
+    #login-row.row.justify-content-center.align-items-center
+      #login-column.col-md-6
+        #login-box.col-md-12
+          = form_for resource, as: resource_name, url: session_path(resource_name), class: "register-form form", id: "login-form"  do |f|
+            h3.text-center.text-info = t ".sign_in"
+            .form-group
+              = f.label t(".email"), class: "text-info"
+              = f.email_field :email, placeholder: "email", class: "form-control"
+            .form-group
+              = f.label t(".password"), class: "text-info"
+              = link_to t(".pass_reset"), new_user_password_path, class: "reset_pass ml-1"
+              = f.password_field :password, placeholder: "password", class: "form-control"
+            - if devise_mapping.rememberable?
+              .form-group
+                .custom-control.custom-checkbox.small
+                  = f.check_box :remember_me, id: "customCheck", class: "custom-control-input"
+                  = f.label t(".remember"), class: "custom-control-label", style: "padding: 2px", for: "customCheck"
+              .form-group
+                = f.submit t(".sign_in"), class: "btn btn-info"

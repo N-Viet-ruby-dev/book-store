@@ -8,12 +8,11 @@ html
     = stylesheet_link_tag "manager/application", media: "all"
     = javascript_include_tag "manager/application"
   body
+    = render "shared/flash"
     .wrapper
       = render "shared/manager/left_menu"
       .main-panel
         = render "shared/manager/top"
         .content
-          = render "shared/flash"
-          .container-fluid
-            = yield
+          = yield
         = render "shared/manager/footer"

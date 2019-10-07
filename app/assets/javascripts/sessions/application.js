@@ -3,7 +3,4 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require activestorage
-//= require Chart.min
-//= require Chart.bundle.min
-//= require manager/custom
 //= require gritter
