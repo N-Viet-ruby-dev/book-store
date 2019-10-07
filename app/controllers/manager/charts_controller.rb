@@ -33,7 +33,7 @@ module Manager
     private
 
     def select_year
-      @year = Order.pluck("YEAR(created_at)").uniq
+      @year = Order.pluck(Arel.sql("DISTINCT YEAR(created_at)"))
     end
 
     def days_in_month
