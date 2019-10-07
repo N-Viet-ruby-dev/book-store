@@ -16,6 +16,10 @@ class Cart < ApplicationRecord
     current_item
   end
 
+  def total_price
+    order_details.to_a.sum(&:price)
+  end
+
   private
 
   def check_quantity(item, book)
