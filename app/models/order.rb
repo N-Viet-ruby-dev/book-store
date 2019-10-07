@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
   enum status: { processing: 0, finish: 1, failed: 2 }
 
@@ -9,11 +9,12 @@ class Order < ApplicationRecord
 
   has_many :order_details, dependent: :destroy
   has_many :books, through: :order_details
+  has_many :notifications, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 255 }
   validates :email, presence: true, length: { maximum: 255 },
-          format: { with: VALID_EMAIL_REGEX }
-  validates :address, presence: true, length: { maximum: 255}
+                    format: { with: VALID_EMAIL_REGEX }
+  validates :address, presence: true, length: { maximum: 255 }
   validates :phone_number, presence: true, length: { maximum: 11 }
   validates :card_number, presence: true, length: { maximum: 16 }
 
@@ -76,11 +77,14 @@ class Order < ApplicationRecord
   def process_order
     if processing? && check_order_valid?
       except_book_quantity
+      notify = notifications.create!(content: I18n.t("order_success", order_id: id))
+      NotificationBroadcastJob.perform_now(notify)
       finish!
     else
+      notify = notifications.create!(content: I18n.t("order_unsuccess", order_id: id))
+      NotificationBroadcastJob.perform_now(notify)
       failed!
     end
-
   end
 
   def check_order_valid?

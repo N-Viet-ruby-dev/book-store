@@ -3,9 +3,14 @@
 class OrdersController < ApplicationController
   include CurrentCart
   include LoadEntity
-  before_action :load_entity, only: [:new, :create]
-  before_action :load_cart
-  before_action :ensure_cart_isnt_empty
+  before_action :load_entity, only: %i[show new create]
+  before_action :load_cart, only: %i[new create]
+  before_action :ensure_cart_isnt_empty, only: %i[new create]
+  before_action :load_order, only: :show
+
+  def show
+    @order.notifications.update_all(status: :seen)
+  end
 
   def new
     @order = Order.new
@@ -31,5 +36,9 @@ class OrdersController < ApplicationController
 
   def ensure_cart_isnt_empty
     redirect_to books_url, notice: t("cart_empty") if @cart.order_details.empty?
+  end
+
+  def load_order
+    @order = Order.find(params[:id])
   end
 end

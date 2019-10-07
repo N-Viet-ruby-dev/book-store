@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_010131) do
+ActiveRecord::Schema.define(version: 2019_10_07_041609) do
 
   create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -62,6 +62,15 @@ ActiveRecord::Schema.define(version: 2019_10_07_010131) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "order_id"
+    t.text "content"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_notifications_on_order_id"
   end
 
   create_table "order_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -140,6 +149,7 @@ ActiveRecord::Schema.define(version: 2019_10_07_010131) do
   add_foreign_key "books", "authors"
   add_foreign_key "books", "categories"
   add_foreign_key "books", "publishers"
+  add_foreign_key "notifications", "orders"
   add_foreign_key "order_details", "books"
   add_foreign_key "order_details", "carts"
   add_foreign_key "order_details", "orders"

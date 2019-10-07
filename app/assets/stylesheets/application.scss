@@ -824,5 +824,47 @@ span.text_right {
 
 .bill_address {
   padding: 4rem;
+  font-size: 2rem;
 }
 
+i.fas.fa-bell.clickable {
+  font-size: 4rem;
+  color: white;
+}
+
+.dropdown-menu {
+  z-index: 1000;
+}
+
+.dropdown-menu {
+  width: 42rem;
+  font-size: 1.5rem;
+}
+
+.bell {
+  color: yellow !important;
+}
+.unseen {
+  background-color: #fcff82;
+}
+
+.invoice-title h2, .invoice-title h3 {
+    display: inline-block;
+}
+
+.table > tbody > tr > .no-line {
+    border-top: none;
+}
+
+.table > thead > tr > .no-line {
+    border-bottom: none;
+}
+
+.table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+#invoice {
+  padding: 4rem;
+  font-size: 2rem;
+  border-radius: 5px;
+}
