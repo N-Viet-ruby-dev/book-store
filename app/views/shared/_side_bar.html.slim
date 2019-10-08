@@ -1,11 +1,12 @@
 h3 = t "category"
 .sidebar
   ul.sidebar__list
-    - categories.each do |category|
-      li
-        = link_to "#", class: "sidebar__link" do
-          .sidebar__data
-            h4.sidebar__name = category.name
+    - if categories
+      - categories.each do |category|
+        li
+          = link_to "#", class: "sidebar__link" do
+            .sidebar__data
+              h4.sidebar__name = category.name
 
   .sidebar__pages
     = button_tag "#", class: "btn-inline" do
@@ -14,11 +15,12 @@ h3 = t "category"
 h3 = t "authors"
 .sidebar
   ul.sidebar__list
-    - authors.each do |author|
-      li
-        = link_to "#", class: "sidebar__link" do
-          .sidebar__data
-            h4.sidebar__name = author.name
+    - if categories
+      - authors.each do |author|
+        li
+          = link_to "#", class: "sidebar__link" do
+            .sidebar__data
+              h4.sidebar__name = author.name
 
   .sidebar__pages
     = button_tag "#", class: "btn-inline" do

@@ -6,6 +6,7 @@ class BooksController < ApplicationController
   include LoadEntity
   before_action :load_entity, only: %i[index show]
   before_action :load_cart
+  before_action :load_book, only: :show
 
   def index
     @books = Book.includes(:author, :publisher).page(params[:page]).per(9)
@@ -19,5 +20,9 @@ class BooksController < ApplicationController
     @exciting_books = Book.limit(3)
     @best_sellers = Book.select("books.*, SUM(order_details.quantity) sum").joins(:order_details)
                         .group(:id).order(sum: :desc).limit(3)
+  end
+
+  def load_book
+    @book = Book.find(params[:id])
   end
 end

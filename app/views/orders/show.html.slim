@@ -1,0 +1,54 @@
+.bg-white#invoice
+  .row
+    .col-12
+      .invoice-title
+        strong = t( "invoice_order", { order_id: @order.id, status: @order.status } )
+      hr
+  .row
+    .col-6
+      address
+        strong = t("information")
+        br
+        = @order.name
+        br
+        = @order.address
+        br
+        = @order.email
+        br
+        = @order.phone_number
+        br
+        = @order.card_number
+    hr
+
+  .row
+    .col-md-12
+      .panel.panel-default
+        .panel-heading
+          h2.panel-title
+            strong = t("order_summary")
+        .panel-body
+          .table-responsive
+            table.table.table-condensed
+              thead
+                tr
+                  td
+                    strong = t("item")
+                  td.text-center
+                    strong = t("price")
+                  td.text-center
+                    strong = t("quantity")
+                  td.text-right
+                    strong = t("totals")
+              tbody
+                - @order.order_details.each do |detail|
+                  tr
+                    td = detail.book.name
+                    td.text-center = number_to_currency(detail.book.price)
+                    td.text-center = detail.quantity
+                    td.text-right  = number_to_currency(detail.price)
+                tr
+                  td.thick-line
+                  td.thick-line
+                  td.thick-line.text-center
+                    strong = t("totals")
+                  td.thick-line.text-right = number_to_currency(@order.total_price)

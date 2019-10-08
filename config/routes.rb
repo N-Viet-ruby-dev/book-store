@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :room_messages
   resources :rooms
   resources :books, only: [:index, :show]
-  resources :orders, only: [:new, :create]
+  resources :orders, only: [:show, :new, :create]
   resources :carts, only: :update
 
   mount ActionCable.server => '/cable'

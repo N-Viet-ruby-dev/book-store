@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
   enum role: { guest: 0, admin: 1 }
   enum online: { offline: 0, online: 1 }
@@ -10,11 +10,12 @@ class User < ApplicationRecord
   has_many :room_messages
   has_many :assigned_rooms, class_name: "Room", foreign_key: "assignee_id"
   has_many :orders, dependent: :destroy
+  has_many :notifications, through: :orders
 
   validates :fullname, presence: true, length: { maximum: 50 }
   validates :password, length: { minimum: 6 }, allow_nil: true
   validates :email, presence: true, length: { maximum: 255 },
-            format: { with: VALID_EMAIL_REGEX }, uniqueness: true
+                    format: { with: VALID_EMAIL_REGEX }, uniqueness: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
