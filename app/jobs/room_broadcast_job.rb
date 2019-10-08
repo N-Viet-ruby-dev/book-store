@@ -12,6 +12,6 @@ class RoomBroadcastJob < ApplicationJob
   private
 
   def room_renderer(room)
-    RoomsController.render partial: "rooms/rooms_list", locals: { room: room }
+    ApplicationController.render partial: "manager/rooms/rooms_list", locals: { room: room }
   end
 end

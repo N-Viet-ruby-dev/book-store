@@ -4,7 +4,7 @@ $(document).ready(function() {
   var totalChart;
   var bookChartInYear;
 
-  if ($('#chart_revenue') || $('#chart_books')) {
+  if ($('#chart_revenue').length > 0  || $('#chart_books').length > 0 ) {
     refreshPage();
   };
 

@@ -7,3 +7,4 @@
 //= require Chart.bundle.min
 //= require manager/custom
 //= require gritter
+//= require cable
