@@ -1,5 +1,5 @@
 - if room.opening? && room.guest
-  = link_to room_path(room), id: "room_#{room.id}", remote: true do
+  = link_to manager_room_path(room), id: "room_#{room.id}", remote: true do
     div class="chat_list #{ room.room_messages.last.status }" id="item_#{ room.id }"
       .chat_people
         .chat_img

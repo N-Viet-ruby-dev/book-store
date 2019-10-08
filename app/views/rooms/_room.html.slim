@@ -1,3 +1,4 @@
 .msg_history#messages data-room-id="#{ room.id }" data-user-id="#{ current_or_guest_user.id }"
-  = render room.room_messages, current_user_id: current_or_guest_user.id
+  = render partial: "room_messages/room_message", collection: room.room_messages,
+    as: :room_message, locals: { current_user_id: current_or_guest_user.id }
 = render "room_messages/message_form", room: room

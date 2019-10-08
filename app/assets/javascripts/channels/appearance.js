@@ -5,8 +5,6 @@ var CreateApperanceChanel = function () {
 }
 
 $(document).ready(function () {
-  if( $('body.admin').length > 0 ) {
-    CreateApperanceChanel();
-  };
+  CreateApperanceChanel();
 })
 

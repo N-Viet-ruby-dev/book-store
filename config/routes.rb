@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: "manager/sessions", passwords: "manager/passwords"}
 
   resources :room_messages
-  resources :rooms
+  resources :rooms, only: :create
   resources :books, only: [:index, :show]
   resources :orders, only: [:show, :new, :create]
   resources :carts, only: :update
@@ -33,6 +33,7 @@ Rails.application.routes.draw do
         get "book_has_biggest_revenue_in_month"
       end
     end
+    resources :rooms, only: [:index, :show]
   end
 
   post "/add_book", to: "carts#add_book"
