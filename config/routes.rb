@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show]
   resources :orders, only: [:show, :new, :create]
   resources :carts, only: :update
+  resources :categories, only: [:index, :show]
+  resources :authors, only: [:index, :show]
 
   mount ActionCable.server => '/cable'
 

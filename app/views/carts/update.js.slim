@@ -1,5 +1,5 @@
 - if @cart.errors.any?
   - @cart.errors.full_messages.each do |error|
-    = add_gritter(error, title: t("book_store"), sticky: false)
+    = add_gritter(error, title: t("book_store"), sticky: false, time: 1000)
 - else
-  = add_gritter( t("cart_updated"), title: t("book_store"), sticky: false)
+  = add_gritter( t("cart_updated"), title: t("book_store"), sticky: false, time: 1000)

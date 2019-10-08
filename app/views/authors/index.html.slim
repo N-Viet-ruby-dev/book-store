@@ -1,0 +1,10 @@
+.album.text-muted
+  .container
+    .row
+      = render partial: 'author', collection: @authors
+.row
+  .col-6.offset-3
+    .sidebar__pages
+    = link_to_prev_page @authors, t("prev_page"), class: "btn-inline sidebar__btn--prev mr-40rem"
+    = link_to_next_page @authors, t("next_page"), class: "btn-inline sidebar__btn--prev"
+

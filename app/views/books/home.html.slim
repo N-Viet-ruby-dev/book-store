@@ -44,7 +44,7 @@ main
               p.feature-box__text = category.description
 
     .u-center-text.u-margin-top-huge
-      = link_to t("category"), "#", class: "btn-text"
+      = link_to t("category"), categories_path, class: "btn-text"
 
   section#section-tours.section-tours
     .u-center-text.u-margin-bottom-big
@@ -94,6 +94,6 @@ main
             p = author.description
 
     .u-center-text.u-margin-top-huge
-      = link_to t("authors"), "#", class: "btn-text"
+      = link_to t("authors"), authors_path, class: "btn-text"
 
 = render "shared/footer"

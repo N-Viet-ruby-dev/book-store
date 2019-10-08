@@ -1,0 +1,6 @@
+.col-md-4.category_item
+  .card.portfolio-box
+    = link_to author_path(author) do
+      = image_tag author.image_url, width: "100%", height: "400px"
+    p.card-text
+      span = link_to author.name, author_path(author)

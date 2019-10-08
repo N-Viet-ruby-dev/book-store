@@ -1,0 +1,6 @@
+.col-md-4.category_item
+  .card.portfolio-box
+    = link_to category_path(category_item) do
+      = image_tag category_item.image_url, width: '100%'
+    p.card-text
+      span = link_to category_item.name, category_path(category_item)
