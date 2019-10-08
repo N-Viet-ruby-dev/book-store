@@ -52,7 +52,7 @@ puts "Category, author, publisher create"
 1000.times do |n|
   Book.create!( name: Faker::Book.title + "#{n}",
                 price: Faker::Number.number(digits: 2),
-                total: Faker::Number.number(digits: 2), status: 0,
+                quantity: Faker::Number.number(digits: 2), status: 0,
                 category_id: Category.all.sample.id,
                 author_id: Author.all.sample.id,
                 publisher_id: Publisher.all.sample.id,

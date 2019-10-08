@@ -136,6 +136,8 @@ GEM
     faker (2.5.0)
       i18n (~> 1.6.0)
     ffi (1.11.1)
+    figaro (1.1.1)
+      thor (~> 0.14)
     font-awesome-sass (5.11.2)
       sassc (>= 1.11)
     globalid (0.4.2)
@@ -316,6 +318,7 @@ DEPENDENCIES
   delayed_job_active_record (~> 4.1)
   devise (~> 4.7.1)
   faker (~> 2.3)
+  figaro
   font-awesome-sass (~> 5.11.2)
   gritter (~> 1.2)
   html2slim

@@ -1,0 +1,7 @@
+GMAIL_USERNAME: example@gmail.com
+GMAIL_PASSWORD: password
+ADDRESS: smtp.gmail.com
+production:
+  GMAIL_USERNAME: example@gmail.com
+  GMAIL_PASSWORD: password
+  DOMAIN: domain

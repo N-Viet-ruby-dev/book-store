@@ -4,7 +4,9 @@ $(document).ready(function() {
   var totalChart;
   var bookChartInYear;
 
-  refreshPage();
+  if ($('#chart_revenue') || $('#chart_books')) {
+    refreshPage();
+  };
 
   // Charts Order by the month in year
   $(document).on('click', '#myChart', function(event){

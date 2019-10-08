@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   root to: "books#home"
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: "manager/sessions", passwords: "manager/passwords"}
 
   resources :room_messages
   resources :rooms

@@ -1,0 +1,19 @@
+#login
+  .container
+    #login-row.row.justify-content-center.align-items-center
+      #login-column.col-md-6
+        #login-box.col-md-12
+          = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+            h3.text-center.text-info = t ".reset_password"
+            = render "shared/manager/error_messages", object: resource
+            = f.hidden_field :reset_password_token
+            .form-group
+              = f.label t(".password"), class: "control-label"
+              = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control form-control-user"
+            .form-group
+              = f.label t(".pass_confirm"), class: "control-label"
+              = f.password_field :password_confirmation, autocomplete: "off", class: "form-control form-control-user"
+            .actions
+              = f.submit t(".change_btn"), class: "btn btn-primary btn-user btn-block"
+          .text-center
+            = link_to t(".login_link"), new_user_session_path, class: "small"
