@@ -27,6 +27,12 @@ class Order < ApplicationRecord
           .group("DATE_FORMAT(created_at, '%b')").sum("total_price")
   }
 
+  scope :total_revenue_months_in_years, lambda { |start_year, end_year|
+    where("YEAR(created_at) BETWEEN ? AND ?", start_year, end_year)
+          .group("DATE_FORMAT(created_at, '%b')", "YEAR(created_at)")
+          .pluck("DATE_FORMAT(created_at, '%b')", "SUM(total_price)", "YEAR(created_at)")
+  }
+
   scope :revenue_day_in_month, lambda { |month, year|
     finish.where("DATE_FORMAT(created_at, '%b') = ? AND YEAR(created_at) = ?", month, year)
           .group("DATE_FORMAT(created_at, '%e')").sum("total_price")
@@ -42,25 +48,22 @@ class Order < ApplicationRecord
                  .pluck(Arel.sql("DATE_FORMAT(orders.created_at, '%b')"), Arel.sql("SUM(order_details.quantity)"))
   }
 
-  scope :top_best_sell_book, lambda { |year|
-    joins(:books).finish.where("YEAR(orders.created_at) = ?", year)
-                 .group("books.id")
-                 .having("total >= ?", OrderDetail.top_total(year)).order("total DESC")
-                 .pluck(Arel.sql("books.name"), Arel.sql("SUM(order_details.quantity) as total"))
+  scope :best_sell_book_in_year, lambda { |year|
+    joins(:books)
+    .finish.where("YEAR(orders.created_at) = ?", year)
+    .group("books.id").order("total DESC").limit("10")
+    .pluck(Arel.sql("books.name"), Arel.sql("SUM(order_details.quantity) as total"))
   }
 
-  scope :top_book_big_revenue, lambda { |year|
+  scope :revenue_bigger_book_in_year, lambda { |year|
     joins(:books).finish.where("YEAR(orders.created_at) = ?", year)
-                 .group("books.id")
-                 .having("total_price >= ?", OrderDetail.top_total_price(year)).order("total_price DESC")
+                 .group("books.id").order("total_price DESC").limit("10")
                  .pluck(Arel.sql("books.name"), Arel.sql("SUM(order_details.price) as total_price"))
   }
 
-  scope :top_book_big_revenue_in_month, lambda { |year, month|
+  scope :revenue_bigger_book_in_month_of_year, lambda { |year, month|
     joins(:books).finish.where("YEAR(orders.created_at) = ? AND MONTH(orders.created_at) = ?", year, month)
-                 .group("books.id")
-                 .having("total_price >= ?", OrderDetail.top_total_price_in_month(year, month))
-                 .order("total_price DESC")
+                 .group("books.id").order("total_price DESC").limit("10")
                  .pluck(Arel.sql("books.name"), Arel.sql("SUM(order_details.price) as total_price"))
   }
 

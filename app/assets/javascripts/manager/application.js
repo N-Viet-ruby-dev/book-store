@@ -8,3 +8,5 @@
 //= require manager/custom
 //= require gritter
 //= require cable
+//= require manager/chart-plugin
+//= require jspdf

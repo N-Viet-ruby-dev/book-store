@@ -74,11 +74,11 @@
 
 /*****charts******/
 
-.to_month_order, .to_day_order, #myChartByMonth, .chart_oder_details {
+.to_month_order, #myChartByMonth, .chart_oder_details {
   width: 100%;
 }
 
-.week-order, #year, .charts-order, .option-from {
+#year, .charts-order, .option-from {
   width: 100%;
   display: -webkit-inline-box;
 }
@@ -112,6 +112,7 @@
 
 .pieChart {
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .compare_between_year {
@@ -129,10 +130,6 @@
   border-radius: 40px;
 }
 
-.pieChart {
-  margin-bottom: 20px;
-}
-
 .dropdown-account {
   margin-left: 85%;
 }
@@ -140,8 +137,39 @@
 .dropdown-menu {
   padding: 0;
 }
+
 .main-panel > .content {
     padding: 30px 15px;
     min-height: 90vh !important;
     max-height: 500vh;
+}
+
+.title-link {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#downloadPdf {
+  float: right;
+  margin-right: 40px;
+}
+
+.statistical_books, .statistical_revenue {
+  margin-left: 40px;
+  float: left;
+}
+
+.chart-title {
+  width: 100%;
+}
+
+.chart-title > h3 {
+  font-weight: 900;
+}
+
+.week-order {
+  background: #e7eaec;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }

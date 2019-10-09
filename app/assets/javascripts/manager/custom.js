@@ -4,7 +4,7 @@ $(document).ready(function() {
   var totalChart;
   var bookChartInYear;
 
-  if ($('#chart_revenue').length > 0  || $('#chart_books').length > 0 ) {
+  if ($('#chart_revenue').length > 0 || $('#chart_books').length > 0 ) {
     refreshPage();
   };
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
             var keys = Object.keys(data);
             var values = Object.values(data);
             var ctx = $('#myChartByMonth');
-            monthChart = responseBarChart('horizontalBar', keys, values, month, 'Revenue In ' + month + ' ' + year, ctx, getRandomColor(), '#008080', '#3e95cd', 'Currency($)', 'Day' );
+            monthChart = responseBarChart('horizontalBar', keys, values, month, true, 'Revenue In ' + month + ' ' + year, ctx, getRandomColor(), '#008080', '#3e95cd', 'Currency($)', 'Day' );
           }
         });
       } else {
@@ -62,7 +62,15 @@ $(document).ready(function() {
             borderColor: '#fff',
             fill: false
           };
-          addBarData(yearChart, dataset);
+          if ($('#myChart').length > 0 ) {
+            addBarData(yearChart, dataset);
+          } else {
+            $('.to_day_order').append('<canvas class="chart_by_year" id="myChart"></canvas>');
+            var values = Object.values(data);
+            var keys = Object.keys(data);
+            var ctx = $('#myChart');
+            yearChart = responseBarChart('bar', keys, values, year, true, 'Revenue In ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Month', 'Currency($)')
+          }
         }
       });
     } else {
@@ -93,7 +101,7 @@ $(document).ready(function() {
           keys.forEach(function(){
             color.push(getRandomColor());
           });
-          monthChart = responsePieChart(keys, values, 'Total Revenue The Year',ctx, color);
+          monthChart = responseBarChart('bar', keys, values, '', false, 'Total Revenue The Year', ctx, color, color, color, 'Years', 'Currency($)');
         }
       });
     } else {
@@ -147,7 +155,7 @@ $(document).ready(function() {
           var values = Object.values(data.top);
           var ctx = $('#book_has_big_revenue');
           var color = getRandomColor();
-          responseBarChart('bar', keys, values, year, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
+          responseBarChart('bar', keys, values, year, true, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
         }
       });
     } else {
@@ -175,7 +183,7 @@ $(document).ready(function() {
           var values = Object.values(data);
           var ctx = $('#book_has_big_revenue_in_month');
           var color = getRandomColor();
-          responseBarChart('bar', keys, values, year, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
+          responseBarChart('bar', keys, values, year, true, 'Books Has Biggest Revenue '+month+'/'+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
         }
       });
     } else {
@@ -204,7 +212,7 @@ $(document).ready(function() {
           var values = Object.values(data);
           var ctx = $('#best_sell_book_in_month');
           var color = getRandomColor();
-          responseBarChart('bar', keys, values, book, 'Quantity sold per month', ctx, color, color, color, 'Month', 'Quantity Books' );
+          responseBarChart('bar', keys, values, book, true, 'Book quantity sold per month', ctx, color, color, color, 'Month', 'Books Quantity' );
         }
       });
     } else {
@@ -230,12 +238,41 @@ $(document).ready(function() {
           var values = Object.values(data);
           var ctx = $('#best_sell_book_in_year');
           var color = getRandomColor();
-          bookChartInYear = responseBarChart('horizontalBar', keys, values, year, 'Best Selling Books '+year , ctx, color, color, color, 'Quantity Books', 'Books' );
+          bookChartInYear = responseBarChart('horizontalBar', keys, values, year, true, 'Best Selling Books '+year , ctx, color, color, color, 'Quantity Books', 'Books' );
         }
       });
     } else {
       return false;
     }
+  });
+
+  $('#close_book_revenue_year').click(function() {
+    $('#book_has_big_revenue').remove();
+  });
+
+  $('#close_best_sell_book_in_year').click(function() {
+    $('#best_sell_book_in_year').remove();
+  });
+
+  $('#close_book_sold_per_month').click(function() {
+    $('#best_sell_book_in_month').remove();
+  });
+
+  $('#close_book_revenue_in_month').click(function() {
+    $('#book_has_big_revenue_in_month').remove();
+  });
+
+  $('#close_revenue_the_year').click(function() {
+    $('#pieChart').remove();
+  });
+
+  $('#close_revenue_the_month_of_year').click(function() {
+    $('#myChart').remove();
+    arr = [];
+  });
+
+  $('#close_revenue_in_month').click(function() {
+    $('#myChartByMonth').remove();
   });
 
   // auto load ajax after load page, displayed order by the year
@@ -254,7 +291,7 @@ $(document).ready(function() {
         var keys = Object.keys(data);
         var values = Object.values(data);
         var ctx = $('#myChart');
-        yearChart = responseBarChart('bar', keys, values, year, 'Revenue In ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Month', 'Currency($)');
+        yearChart = responseBarChart('bar', keys, values, year, true, 'Revenue In ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Month', 'Currency($)');
       }
     });
 
@@ -271,7 +308,7 @@ $(document).ready(function() {
         var keys = Object.keys(data);
         var values = Object.values(data);
         var ctx = $('#best_sell_book_in_year');
-        bookChartInYear = responseBarChart('horizontalBar', keys, values, year, 'Best Selling Books ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Number Books', 'Books');
+        bookChartInYear = responseBarChart('horizontalBar', keys, values, year, true, 'Best Selling Books ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Books Quantity', 'Books');
       }
     });
 
@@ -289,7 +326,7 @@ $(document).ready(function() {
         var values = Object.values(data.top);
         var ctx = $('#book_has_big_revenue');
         var color = getRandomColor();
-        responseBarChart('bar', keys, values, year, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
+        responseBarChart('bar', keys, values, year, true, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
       }
     });
 
@@ -314,7 +351,7 @@ $(document).ready(function() {
           keys.forEach(function(){
             color.push(getRandomColor());
           });
-          monthChart = responsePieChart(keys, values, 'Total Revenue The Year',ctx, color);
+          responseBarChart('bar', keys, values, '', false, 'Total Revenue The Year', ctx, color, color, color, 'Years', 'Currency($)');
         }
       });
     } else {
@@ -340,16 +377,17 @@ $(document).ready(function() {
           var keys = Object.keys(data);
           var values = Object.values(data);
           var ctx = $('#myChartByMonth');
-          monthChart = responseBarChart('horizontalBar', keys, values, month, 'Revenue In ' + month + ' ' + year, ctx, getRandomColor(), '#008080', '#3e95cd', 'Currency($)', 'Day' );
+          monthChart = responseBarChart('horizontalBar', keys, values, month, true, 'Revenue In ' + month + ' ' + year, ctx, getRandomColor(), '#008080', '#3e95cd', 'Currency($)', 'Day' );
         }
       });
     } else {
       return false;
     }
+
   }
 
   // function to callback Charts
-  function responseBarChart(type='', keys, values, label='', title='', ctx, backgroundColor='', fontColor='', borderColor='', xLabel, yLabel) {
+  function responseBarChart(type='', keys, values, label='', displays, title='', ctx, backgroundColor='', fontColor='', borderColor='', xLabel, yLabel) {
     var chartByYear = new Chart(ctx, {
       type: type,
       data: {
@@ -371,10 +409,7 @@ $(document).ready(function() {
           fontSize: 15
         },
         legend: {
-          display: true,
-          labels: {
-            fontColor: fontColor
-          }
+          display: displays
         },
         scales: {
           yAxes: [{
@@ -383,7 +418,8 @@ $(document).ready(function() {
             },
             scaleLabel: {
               display: true,
-              labelString: yLabel
+              labelString: yLabel,
+              fontSize: 17
             }
           }],
           xAxes: [{
@@ -392,46 +428,24 @@ $(document).ready(function() {
             },
             scaleLabel: {
               display: true,
-              labelString: xLabel
+              labelString: xLabel,
+              fontSize: 17
             }
           }]
         },
-        to: 1
-      }
-    });
-    return chartByYear;
-  };
-
-  function responsePieChart(key, value, title='', ctx, bgcolor) {
-    var chart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: key,
-        datasets: [
-          {
-            label: key,
-            backgroundColor: bgcolor,
-            data: value,
-            borderColor: bgcolor,
-            fill: false
-          }
-        ]
-      },
-      options: {
-        title: {
-          display: true,
-          text: title,
-          fontSize: 15
-        },
-        legend: {
-          display: true,
-          labels: {
-            fontColor: "#000"
+        plugins: {
+          datalabels: {
+            color: 'white',
+            textAlign: 'center',
+            font: {
+              weight: 'bold',
+              size: 10
+            }
           }
         }
       }
     });
-    return chart;
+    return chartByYear;
   };
 
   function addBarData(chart, dataset) {
@@ -439,15 +453,6 @@ $(document).ready(function() {
     chart.options.title.text += " and " + dataset.label;
     chart.update();
   };
-
-  function addPieChartData(chart, dataset) {
-    chart.data.labels.push(dataset.label);
-    chart.data.datasets[0].data.push(dataset.data);
-    chart.data.datasets[0].backgroundColor.push(dataset.color);
-    chart.data.datasets[0].borderColor.push(dataset.color);
-    chart.update();
-  };
-
 
   function getRandomColor() {
     var letters = '0123456789ABCDEF';
@@ -458,5 +463,17 @@ $(document).ready(function() {
     return color;
   };
 
-});
+  // export file pdf
+  $('#downloadPdf').click(function(event) {
+    var pdf = new jsPDF('l');
+    $("canvas").each(function(index) {
+      var imgData = $(this)[0].toDataURL('image/png');
+      pdf.addImage(imgData, 'PNG', 20, 20, 250, 180);
+      if ( index < $("canvas").length - 1 ) {
+        pdf.addPage();
+      }
+    });
+    pdf.save('charts.pdf');
+  });
 
+});

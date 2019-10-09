@@ -1,21 +1,30 @@
-.row#chart_revenue
-  = link_to t(".statistical_book"), manager_chart_books_path, class: "statistical_books"
-  h3 = t ".revenue_the_year"
-  .form-group.week-order.col-md-12
-    .option-year.col-md-5
-      = select_tag :year, options_for_select(@year), class: "form-control order-year year_1"
-    .arrow_directori.col-md-2
-      = image_tag "vs.png", class: "vs-image"
-    .option-year.col-md-5
-      = select_tag :year, [], class: "form-control order-year year_2"
-  #charts.row
-    .col-md-12.pieChart
-    h3 = t ".select_year"
-    .col-md-12.week-order
-      .option-year.col-md-5
-        = select_tag :year, options_for_select(@year), class: "form-control year-1"
-    .col-md-12.to_day_order
-      canvas#myChart.chart_by_year
-    .col-md-12.to_month_order
+.container
+  .row#chart_revenue
+    .title-link
+      = link_to t(".pdf"), "#", id: "downloadPdf", class: "btn btn-primary btn-sm"
+      = link_to t(".statistical_book"), manager_chart_books_path, class: "btn btn-primary btn-sm statistical_books"
+    .chart-title
+        h3 = t ".revenue_the_year"
+    .week-order.col-md-12
+      = button_tag t(".btn"), class: "close", id: "close_revenue_the_year", aria: {label: "Close"}, data: {dismiss: "modal"}, type: "button"
+      .row
+        .option-year.col-md-5
+          = select_tag :year, options_for_select(@year), class: "form-control order-year year_1"
+        .arrow_directori.col-md-2
+          = image_tag "vs.png", class: "vs-image"
+        .option-year.col-md-5
+          = select_tag :year, [], class: "form-control order-year year_2"
+      .row.pieChart
+    .chart-title
+      h3 = t ".select_year"
+    .week-order.col-md-12
+      = button_tag t(".btn"), class: "close", id: "close_revenue_the_month_of_year", aria: {label: "Close"}, data: {dismiss: "modal"}, type: "button"
+      .row
+        .option-year.col-md-5
+          = select_tag :year, options_for_select(@year), class: "form-control year-1"
+      .row.to_day_order
+    .chart-title
       h3 = t ".revenue_in_month"
-      canvas#myChartByMonth
+    .week-order.col-md-12
+      = button_tag t(".btn"), class: "close", id: "close_revenue_in_month", aria: {label: "Close"}, data: {dismiss: "modal"}, type: "button"
+      .row.to_month_order

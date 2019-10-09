@@ -28,6 +28,7 @@ gem "whenever", require: false
 gem "kaminari", "~> 1.1"
 gem "gritter", "~> 1.2"
 gem "figaro"
+gem "jspdf-rails", "~> 1.0.3"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]

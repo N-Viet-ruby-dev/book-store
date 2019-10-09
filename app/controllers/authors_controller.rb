@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthorsController < ApplicationController
   def index
     @authors = Author.all.page(params[:page]).per(9)
