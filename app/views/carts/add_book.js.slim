@@ -1,11 +1,13 @@
 - if @order_detail.errors.any?
   - @order_detail.errors.full_messages.each do |error|
-    = add_gritter(error, title: t("book_store"), sticky: false)
+    = add_gritter(error, title: t("book_store"), sticky: false, time: 1000)
 - elsif ( @order_detail.quantity == 1 )
+  = add_gritter("OK", title: t("book_store"), sticky: false, time: 1000)
   | $('.shopping__list').append('#{ @item }');
   | IconOnclick();
   | InputOnchange();
 - else
+  = add_gritter("OK", title: t("book_store"), sticky: false, time: 1000)
   | $('#item_#{ @order_detail.book.id }').replaceWith('#{ @item }');
   | IconOnclick();
   | InputOnchange();

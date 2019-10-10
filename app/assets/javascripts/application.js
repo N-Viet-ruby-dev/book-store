@@ -12,6 +12,7 @@ var IconOnclick = function () {
     var parent = $(this).closest('li')
     parent.hide();
     parent.find('#delete_item_' + $(this).data('id')).val(true);
+    jQuery.gritter.add({title: "The book store!", text: "Click update to finish!", time: 1000});
   });
 }
 
@@ -24,9 +25,9 @@ var InputOnchange = function () {
     var parent = $(this).closest('li');
     parent.find('.text_right.price').text('$' + quantity * price);
     if ( $(this).val() == max ) {
-      jQuery.gritter.add({title: "The book store!", text: "Quantity can't higher"});
+      jQuery.gritter.add({title: "The book store!", text: "Quantity can't higher", time: 1000});
     } else if ( $(this).val() == min ) {
-      jQuery.gritter.add({title: "The book store!", text: "Quantity can't lower"});
+      jQuery.gritter.add({title: "The book store!", text: "Quantity can't lower", time: 1000});
     };
   });
 }

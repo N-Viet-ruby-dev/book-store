@@ -1,0 +1,9 @@
+.album.text-muted
+  .container
+    .row
+      = render partial: 'category_item', collection: @categories
+.row
+  .col-6.offset-3
+    .sidebar__pages
+    = link_to_prev_page @categories, t("prev_page"), class: "btn-inline sidebar__btn--prev mr-40rem"
+    = link_to_next_page @categories, t("next_page"), class: "btn-inline sidebar__btn--prev"

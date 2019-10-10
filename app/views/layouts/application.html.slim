@@ -17,7 +17,7 @@ html
         h1
           = t "book_store"
       .col-3.text-center
-        i.fas.fa-bell.clickable#notify_bell data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-user-id="#{ current_or_guest_user.id }"
+        i.fas.fa-bell#notify_bell data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-user-id="#{ current_or_guest_user.id }"
         .dropdown-menu#notification_list aria-labelledby="notify_bell"
           - if @notifications
             = render partial: "shared/notification", collection: @notifications, as: :notify
@@ -26,4 +26,4 @@ html
         = render partial: "shared/side_bar", locals: { categories: @categories, authors: @authors }
       .col-9
         = yield
-= render "shared/popup_chat"
+    = render "shared/popup_chat"

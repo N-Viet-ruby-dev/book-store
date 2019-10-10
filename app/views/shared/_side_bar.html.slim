@@ -1,27 +1,27 @@
-h3 = t "category"
-.sidebar
-  ul.sidebar__list
-    - if categories
+- if categories
+  h3 = t "category"
+  .sidebar
+    ul.sidebar__list
       - categories.each do |category|
         li
-          = link_to "#", class: "sidebar__link" do
+          = link_to category_path(category), class: "sidebar__link" do
             .sidebar__data
               h4.sidebar__name = category.name
+    - unless current_page?(categories_path)
+      .sidebar__pages
+        = button_to categories_path, method: "get", class: "btn-inline" do
+          = t("all_category")
 
-  .sidebar__pages
-    = button_tag "#", class: "btn-inline" do
-      = t("all_category")
-
-h3 = t "authors"
-.sidebar
-  ul.sidebar__list
-    - if categories
+- if authors
+  h3 = t "authors"
+  .sidebar
+    ul.sidebar__list
       - authors.each do |author|
         li
-          = link_to "#", class: "sidebar__link" do
+          = link_to author_path(author), class: "sidebar__link" do
             .sidebar__data
               h4.sidebar__name = author.name
-
-  .sidebar__pages
-    = button_tag "#", class: "btn-inline" do
-      = t("all_authors")
+    - unless current_page?(authors_path)
+      .sidebar__pages
+        = button_to authors_path, method: "get", class: "btn-inline" do
+          = t("all_authors")
