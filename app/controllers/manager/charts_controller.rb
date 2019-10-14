@@ -21,8 +21,8 @@ module Manager
 
     def compare_between_year
       condition = condition_between_year params[:year_1], params[:year_2]
-      revenue_between_year = condition.group("YEAR(created_at)").sum("total_price")
-      render json: revenue_between_year
+      result = condition.group("YEAR(created_at)").pluck("YEAR(created_at)", "SUM(total_price)")
+      render json: result.to_h
     end
 
     def select_to_year
@@ -33,7 +33,7 @@ module Manager
     private
 
     def select_year
-      @year = Order.pluck(Arel.sql("DISTINCT YEAR(created_at)"))
+      @year = Order.pluck(Arel.sql("DISTINCT YEAR(created_at)")).sort.reverse
     end
 
     def days_in_month

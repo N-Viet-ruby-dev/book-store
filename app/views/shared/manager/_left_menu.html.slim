@@ -3,12 +3,12 @@
     .logo
       = link_to "Manager Book-Store", "#", class: "simple-text"
     ul.nav
-      li.active
-        = link_to "#" do
+      li class="#{ "active" if current_page?(manager_root_path)}"
+        = link_to manager_root_path do
           i.pe-7s-graph
-          p Dashboard
+          p = t ".chart"
     ul.nav
-      li.no-active
-        = link_to "#" do
+      li class="#{ "active" if current_page?(manager_rooms_path)}"
+        = link_to manager_rooms_path  do
           i.pe-7s-graph
-          p Charts
+          p = t ".rooms"

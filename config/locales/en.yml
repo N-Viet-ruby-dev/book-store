@@ -44,15 +44,21 @@ en:
   manager:
     charts:
       index:
-        revenue_the_year: "Charts Total Revenue The Year"
-        select_year: "Select Year To Compare"
-        revenue_in_month: "Charts Total Revenue In Month Of Year"
-        statistical_book: "Charts Statistical Books"
+        revenue_the_year: "1. Charts Total Revenue The Year"
+        select_year: "2. Chart Compare Monthly Revenue For The Year"
+        revenue_in_month: "3. Charts Total Revenue In Month Of Year"
+        statistical_book: "Books Charts Statistical"
+        pdf: "Download PDF"
+        btn: "×"
     chart_books:
       index:
-        statistical_revenue: "Charts Statistical Revenue"
-        best_sell_year: "Chart Best Selling Books In Year"
-        big_revenue: "Book has the biggest revenue"
+        statistical_revenue: "Revenue Charts Statistical"
+        best_sell_year: "1. Chart Best Selling Books In Year"
+        book_sold_per_month: "2. Chart Book Quantity Sold Per Month"
+        pdf: "Download PDF"
+        book_revenue_in_year: "3. Chart Book Has The Biggest Revenue In Year"
+        book_revenue_in_month: "4. Chart Book Has The Biggest Revenue In Month"
+        btn: "×"
     sessions:
       new:
         sign_in: "Sign In"
@@ -75,3 +81,6 @@ en:
     manager:
       top:
         logout: "Logout"
+      left_menu:
+        chart: "Charts"
+        rooms: "Rooms"

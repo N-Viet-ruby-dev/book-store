@@ -9,7 +9,7 @@ module Manager
     end
 
     def best_selling_books
-      render json: Order.top_best_sell_book(params[:year]).to_h
+      render json: Order.best_sell_book_in_year(params[:year]).to_h
     end
 
     def best_selling_books_in_month
@@ -21,11 +21,11 @@ module Manager
     def book_has_biggest_revenue
       months = Order.where("YEAR(created_at) = ?", params[:year])
                     .pluck(Arel.sql("DISTINCT MONTH(created_at)")).sort
-      render json: { top: Order.top_book_big_revenue(params[:year]).to_h, month: months }
+      render json: { top: Order.revenue_bigger_book_in_year(params[:year]).to_h, month: months }
     end
 
     def book_has_biggest_revenue_in_month
-      render json: Order.top_book_big_revenue_in_month(params[:year], params[:month]).to_h
+      render json: Order.revenue_bigger_book_in_month_of_year(params[:year], params[:month]).to_h
     end
   end
 end
