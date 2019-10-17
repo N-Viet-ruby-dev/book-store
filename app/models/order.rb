@@ -44,7 +44,7 @@ class Order < ApplicationRecord
 
   scope :best_selling_books_the_month_in_year, lambda { |year, book_name|
     joins(:books).finish.where("YEAR(orders.created_at) = ? AND books.name = ?", year, book_name)
-                 .group("orders.created_at")
+                 .group("DATE_FORMAT(orders.created_at, '%b')")
                  .pluck(Arel.sql("DATE_FORMAT(orders.created_at, '%b')"), Arel.sql("SUM(order_details.quantity)"))
   }
 

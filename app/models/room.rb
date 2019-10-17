@@ -4,8 +4,8 @@ class Room < ApplicationRecord
   enum status: { opening: 0, closed: 1 }
 
   belongs_to :assignee, class_name: "User", optional: true
-  belongs_to :guest, class_name: "User", optional: true
-  has_many :room_messages, dependent: :destroy
+  belongs_to :guest, class_name: "User"
+  has_many :room_messages
 
   validates :name, presence: true, uniqueness: true
 
