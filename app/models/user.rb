@@ -21,7 +21,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def reassign_room
-    return if online? || (Time.now - updated_at < Settings.reassign_time_minute.minutes)
+    return if online? || (Time.now - updated_at < 5.seconds)
 
     assigned_rooms.opening.each do |room|
       User.select_assignee.assigned_rooms << room
@@ -30,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def delay_reassign_room
-    delay(run_at: Settings.reassign_time_minute.minutes.from_now).reassign_room
+    delay(run_at: 5.seconds.from_now).reassign_room
   end
 
   def open_guest_room

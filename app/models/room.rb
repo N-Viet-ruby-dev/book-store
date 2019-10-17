@@ -5,7 +5,7 @@ class Room < ApplicationRecord
 
   belongs_to :assignee, class_name: "User", optional: true
   belongs_to :guest, class_name: "User", optional: true
-  has_many :room_messages, dependent: :destroy
+  has_many :room_messages
 
   validates :name, presence: true, uniqueness: true
 

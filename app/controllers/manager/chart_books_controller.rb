@@ -5,7 +5,7 @@ module Manager
     include MonthConcern
 
     def index
-      @year = Order.pluck(Arel.sql("DISTINCT YEAR(created_at)"))
+      @year = Order.pluck(Arel.sql("DISTINCT YEAR(created_at)")).sort.reverse
     end
 
     def best_selling_books

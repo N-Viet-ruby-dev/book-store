@@ -29,7 +29,7 @@ $(document).ready(function() {
             var keys = Object.keys(data);
             var values = Object.values(data);
             var ctx = $('#myChartByMonth');
-            monthChart = responseBarChart('horizontalBar', keys, values, month, true, 'Revenue In ' + month + ' ' + year, ctx, getRandomColor(), '#008080', '#3e95cd', 'Currency($)', 'Day' );
+            monthChart = responseBarChart('horizontalBar', keys, values, month, false, 'Revenue In ' + month + ' ' + year, ctx, getRandomColor(), '#008080', '#3e95cd', 'Currency($)', 'Day' );
           }
         });
       } else {
@@ -155,7 +155,7 @@ $(document).ready(function() {
           var values = Object.values(data.top);
           var ctx = $('#book_has_big_revenue');
           var color = getRandomColor();
-          responseBarChart('bar', keys, values, year, true, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
+          responseBarChart('bar', keys, values, year, false, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
         }
       });
     } else {
@@ -183,7 +183,7 @@ $(document).ready(function() {
           var values = Object.values(data);
           var ctx = $('#book_has_big_revenue_in_month');
           var color = getRandomColor();
-          responseBarChart('bar', keys, values, year, true, 'Books Has Biggest Revenue '+month+'/'+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
+          responseBarChart('bar', keys, values, year, false, 'Books Has Biggest Revenue '+month+'/'+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
         }
       });
     } else {
@@ -196,6 +196,7 @@ $(document).ready(function() {
     var activePoint = bookChartInYear.getElementAtEvent(evt)[0];
     var year = activePoint['_model'].datasetLabel;
     var book = activePoint['_model'].label;
+    debugger
     if (year && book) {
       $.ajax({
         url: '/manager/chart_books/best_selling_books_in_month',
@@ -212,7 +213,7 @@ $(document).ready(function() {
           var values = Object.values(data);
           var ctx = $('#best_sell_book_in_month');
           var color = getRandomColor();
-          responseBarChart('bar', keys, values, book, true, 'Book quantity sold per month', ctx, color, color, color, 'Month', 'Books Quantity' );
+          responseBarChart('bar', keys, values, book, false, 'Book quantity sold per month ' + year, ctx, color, color, color, 'Month', 'Books Quantity' );
         }
       });
     } else {
@@ -238,7 +239,7 @@ $(document).ready(function() {
           var values = Object.values(data);
           var ctx = $('#best_sell_book_in_year');
           var color = getRandomColor();
-          bookChartInYear = responseBarChart('horizontalBar', keys, values, year, true, 'Best Selling Books '+year , ctx, color, color, color, 'Quantity Books', 'Books' );
+          bookChartInYear = responseBarChart('horizontalBar', keys, values, year, false, 'Best Selling Books '+year , ctx, color, color, color, 'Quantity Books', 'Books' );
         }
       });
     } else {
@@ -308,7 +309,7 @@ $(document).ready(function() {
         var keys = Object.keys(data);
         var values = Object.values(data);
         var ctx = $('#best_sell_book_in_year');
-        bookChartInYear = responseBarChart('horizontalBar', keys, values, year, true, 'Best Selling Books ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Books Quantity', 'Books');
+        bookChartInYear = responseBarChart('horizontalBar', keys, values, year, false, 'Best Selling Books ' + year, ctx, '#A52A2A', '#A52A2A', '', 'Books Quantity', 'Books');
       }
     });
 
@@ -326,7 +327,7 @@ $(document).ready(function() {
         var values = Object.values(data.top);
         var ctx = $('#book_has_big_revenue');
         var color = getRandomColor();
-        responseBarChart('bar', keys, values, year, true, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
+        responseBarChart('bar', keys, values, year, false, 'Books Has Biggest Revenue '+year , ctx, color, color, color, 'Books Name', 'Currency($)' );
       }
     });
 
@@ -377,7 +378,7 @@ $(document).ready(function() {
           var keys = Object.keys(data);
           var values = Object.values(data);
           var ctx = $('#myChartByMonth');
-          monthChart = responseBarChart('horizontalBar', keys, values, month, true, 'Revenue In ' + month + ' ' + year, ctx, getRandomColor(), '#008080', '#3e95cd', 'Currency($)', 'Day' );
+          monthChart = responseBarChart('horizontalBar', keys, values, month, false, 'Revenue In ' + month + ' ' + year, ctx, getRandomColor(), '#008080', '#3e95cd', 'Currency($)', 'Day' );
         }
       });
     } else {
