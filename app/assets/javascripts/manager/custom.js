@@ -196,7 +196,6 @@ $(document).ready(function() {
     var activePoint = bookChartInYear.getElementAtEvent(evt)[0];
     var year = activePoint['_model'].datasetLabel;
     var book = activePoint['_model'].label;
-    debugger
     if (year && book) {
       $.ajax({
         url: '/manager/chart_books/best_selling_books_in_month',

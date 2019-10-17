@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
-
   enum role: { guest: 0, admin: 1 }
   enum online: { offline: 0, online: 1 }
 
@@ -13,15 +11,12 @@ class User < ApplicationRecord
   has_many :notifications, through: :orders
 
   validates :fullname, presence: true, length: { maximum: 50 }
-  validates :password, length: { minimum: 6 }, allow_nil: true
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX }, uniqueness: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   def reassign_room
-    return if online? || (Time.now - updated_at < 5.seconds)
+    return if online? || (Time.now - updated_at < Settings.reassign_time_minute.minutes)
 
     assigned_rooms.opening.each do |room|
       User.select_assignee.assigned_rooms << room
@@ -30,7 +25,7 @@ class User < ApplicationRecord
   end
 
   def delay_reassign_room
-    delay(run_at: 5.seconds.from_now).reassign_room
+    delay(run_at: Settings.reassign_time_minute.minutes.from_now).reassign_room
   end
 
   def open_guest_room
