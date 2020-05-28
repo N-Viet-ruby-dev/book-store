@@ -25,7 +25,7 @@ gem "font-awesome-sass", "~> 5.11.2"
 gem "delayed_job_active_record", "~> 4.1"
 gem "warden", "~> 1.2"
 gem "whenever", require: false
-gem "kaminari", "~> 1.1"
+gem "kaminari", "~> 1.2"
 gem "gritter", "~> 1.2"
 gem "figaro"
 gem "jspdf-rails", "~> 1.0.3"
